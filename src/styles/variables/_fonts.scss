@@ -1,6 +1,7 @@
-@use '../utils' as *;
+// @use '../utils/fonts.scss';
+// @import url('../utils/_index.scss');
 
-$mainFont: "JetBrainsMono";
+$mainFont: 'JetBrainsMono';
 $secondaryFonts:
   system-ui,
   -apple-system,
@@ -14,7 +15,9 @@ $secondaryFonts:
   'Helvetica Neue',
   sans-serif;
 
-$contentFontStyleRegular: 400 1rem/1 $mainFont;
+$contentFontStyleRegular:
+  400 1rem/1 $mainFont,
+  $secondaryFonts;
 $contentFontStyleBold:
   700 1rem/1 $mainFont,
   $secondaryFonts;
