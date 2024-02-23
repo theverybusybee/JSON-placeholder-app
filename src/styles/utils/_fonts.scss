@@ -1,9 +1,9 @@
 @font-face {
-  font-family: 'JetBrainsMono';
+  font-family: JetBrainsMono;
   font-style: normal;
   font-weight: 400;
   src:
-    local('JetBrainsMono'),
+    // local(JetBrainsMono),
     url('../../assets/fonts/JetBrainsMono/Regular/JetBrainsMono-Regular.woff2')
       format('woff2'),
     url('../../assets/fonts/JetBrainsMono/JetBrainsMono-Regular.ttf')
@@ -11,11 +11,11 @@
 }
 
 @font-face {
-  font-family: 'JetBrainsMono';
+  font-family: JetBrainsMono;
   font-style: normal;
   font-weight: 500;
   src:
-    local('JetBrainsMono'),
+    // local(JetBrainsMono),
     url('../../assets/fonts/JetBrainsMono/Medium/JetBrainsMono-Medium.woff2')
       format('woff2'),
     url('../../assets/fonts/JetBrainsMono/Medium/JetBrainsMono-Medium.ttf')
@@ -23,11 +23,11 @@
 }
 
 @font-face {
-  font-family: 'JetBrainsMono';
+  font-family: JetBrainsMono;
   font-style: normal;
   font-weight: 700;
   src:
-    local('JetBrainsMono'),
+    // local(JetBrainsMono),
     url('../../assets/fonts/JetBrainsMono/Bold/JetBrainsMono-Bold.woff2')
       format('woff2'),
     url('../../assets/fonts/JetBrainsMono/Bold/JetBrainsMono-Bold.ttf')
