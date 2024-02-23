@@ -1,0 +1,27 @@
+@use '../variables' as *;
+@use '../mixins/' as *;
+
+:root {
+  font-size: 16px;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100svh;
+  margin: 0;
+  padding: 0;
+  font: $contentFontStyleRegular;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // background: $bodyColor;
+}
