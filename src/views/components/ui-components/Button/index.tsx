@@ -9,7 +9,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`${styles.button} ${styles['button' + shape]}`}
+      className={`${styles.button} ${styles['button' + shape]} `}
       onClick={onClick}
     >
       {content}
