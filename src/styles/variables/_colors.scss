@@ -1,0 +1,32 @@
+// colors
+$white-color: #fff;
+$eerie-color: #191919;
+$magenta-color: #ff00f5;
+$teal-color: #0feffd;
+$carbon-color: #333;
+
+// gradients
+$main-gradient: linear-gradient(
+  136deg,
+  #0feffd 1.25%,
+  #ff00f5 51.73%,
+  rgba(15, 239, 253, 0) 94.73%
+);
+$icon-gradient: linear-gradient(136deg, #0feffd 1.25%, #ff00f5 99.14%);
+$button-gradient: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  ),
+  linear-gradient(
+    136deg,
+    rgba(15, 239, 253, 0.5) 1.25%,
+    #ff00f5 51.73%,
+    rgba(15, 239, 253, 0.5) 99.14%
+  );
+$button-disabled-gradient: linear-gradient(
+  136deg,
+  #1d1d1d 1.25%,
+  #c4c4c4 57.54%,
+  rgba(196, 196, 196, 0) 99.14%
+);
