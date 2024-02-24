@@ -1,0 +1,24 @@
+@import '/src/styles/variables';
+
+.article {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: $dust-color;
+  border-radius: 8px;
+  background-color: $eerie-color;
+
+  .usernameContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .content {
+    font: $contentFontStyleRegular;
+    &_bold {
+      font-weight: 700;
+    }
+  }
+}
