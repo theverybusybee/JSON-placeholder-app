@@ -44,7 +44,8 @@
         $button-gradient,
         64px,
         64px,
-        1px
+        1px, 
+        -2
       );
     }
   }
@@ -53,7 +54,7 @@
     border-radius: 8px;
     &_active,
     &:hover {
-      @include addGradientBorder($eerie-color, $button-gradient, 8px, 8px, 1px);
+      @include addGradientBorder($eerie-color, $button-gradient, 8px, 8px, 1px, -2);
     }
   }
 

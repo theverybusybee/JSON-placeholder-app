@@ -19,7 +19,14 @@
     &:hover:not(&:checked) {
       position: relative;
       & ~ .customCheckbox {
-        @include addGradientBorder($eerie-color, $icon-gradient, 3px, 5px, 2px);
+        @include addGradientBorder(
+          $eerie-color,
+          $icon-gradient,
+          3px,
+          5px,
+          2px,
+          0
+        );
         border-color: transparent;
       }
     }

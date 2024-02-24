@@ -1,15 +1,16 @@
 import styles from './index.module.scss';
-import type { ButtonProps } from './types';
+import { ButtonShape, type ButtonProps } from './types';
 
 export const Button: React.FC<ButtonProps> = ({
   content,
   onClick,
-  shape,
+  shape = ButtonShape.Rounded,
   Icon,
+  extraClass,
 }) => {
   return (
     <button
-      className={`${styles.button} ${styles['button' + shape]} `}
+      className={`${styles.button} ${styles['button' + shape]} ${extraClass}`}
       onClick={onClick}
     >
       {content}
