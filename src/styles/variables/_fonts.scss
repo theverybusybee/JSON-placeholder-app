@@ -1,6 +1,3 @@
-// @use '../utils/fonts.scss';
-// @import url('../utils/_index.scss');
-
 $mainFont: 'JetBrainsMono';
 $secondaryFonts:
   system-ui,
@@ -16,14 +13,14 @@ $secondaryFonts:
   sans-serif;
 
 $contentFontStyleRegular:
-  400 1rem/1 $mainFont,
+  400 1rem/1.25rem $mainFont,
   $secondaryFonts;
 $contentFontStyleBold:
-  700 1rem/1 $mainFont,
+  700 1rem/1.25rem $mainFont,
   $secondaryFonts;
 $buttonFontStyle:
-  400 1rem/1 $mainFont,
+  400 1rem/1.25rem $mainFont,
   $secondaryFonts;
 $inputPlaceholderFontStyle:
-  400 1.75rem/1 $mainFont,
+  400 1.75rem/1.25rem $mainFont,
   $secondaryFonts;
