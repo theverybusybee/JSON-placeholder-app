@@ -32,3 +32,13 @@
     z-index: calc($z-index + 1);
   }
 }
+
+@mixin defineButtonBorderStyle($borderStyle, $bgColor, $gradientColor) {
+  @if $borderStyle == rounded {
+    border-radius: 64px;
+    @include addGradientBorder($bgColor, $gradientColor, 64px, 64px, 1px, -2);
+  } @else {
+    border-radius: 8px;
+    @include addGradientBorder($bgColor, $gradientColor, 8px, 8px, 1px, -2);
+  }
+}
