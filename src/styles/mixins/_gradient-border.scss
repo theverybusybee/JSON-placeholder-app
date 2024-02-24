@@ -3,7 +3,8 @@
   $gradientColor,
   $innerBorderRadius,
   $outerBorderRadius,
-  $borderWidth
+  $borderWidth,
+  $z-index
 ) {
   &::before,
   &::after {
@@ -19,7 +20,7 @@
     width: calc(100% + $borderWidth * 2);
     height: calc(100% + $borderWidth * 2);
     border-radius: $outerBorderRadius;
-    z-index: -2;
+    z-index: $z-index;
   }
 
   &::after {
@@ -28,6 +29,6 @@
     inset: 0;
     border-radius: $innerBorderRadius;
     background: $bgColor;
-    z-index: -1;
+    z-index: calc($z-index + 1);
   }
 }
