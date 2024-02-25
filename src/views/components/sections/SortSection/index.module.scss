@@ -1,0 +1,14 @@
+@import '/src/styles/variables/colors';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: $dust-color;
+
+  .buttonsContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}

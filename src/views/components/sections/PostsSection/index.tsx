@@ -4,35 +4,26 @@ import clsx from 'clsx';
 import { PostList } from '../PostList';
 import { useAppSelector } from 'app/hooks';
 import { selectPosts } from 'slices/postsSlice';
-import { type SyntheticEvent, useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Pagination } from 'views/components/ui-components/Pagination';
 
-export const PostsSection: React.FC<PostsSectionProps> = ({ extraClass }) => {
+export const PostsSection: React.FC<PostsSectionProps> = ({
+  postsAmount,
+  extraClass,
+}) => {
   const posts = useAppSelector(selectPosts);
   const [currentPageState, setCurrentPageState] = useState<number>(1);
 
-  const postsAmount = localStorage.getItem('postsAmount')
-    ? +localStorage.getItem('postsAmount')!
-    : 1;
-
   const currentPosts = useMemo(() => {
-    const startIndex = postsAmount * (currentPageState! - 1);
-    const endIndex = startIndex + postsAmount;
-    console.log('startIndex');
-    console.log(startIndex);
-
-    console.log('endIndex');
-    console.log(endIndex);
+    const startIndex = +postsAmount * (currentPageState! - 1);
+    const endIndex = startIndex + +postsAmount;
 
     return [...posts].slice(startIndex, endIndex);
-  }, [posts.length, postsAmount, currentPageState]);
+  }, [posts, posts.length, postsAmount, currentPageState]);
 
-  const handleChangePage = useCallback(
-    (e: SyntheticEvent, pageNumber: number) => {
-      setCurrentPageState(pageNumber);
-    },
-    [],
-  );
+  const handleChangePage = (pageNumber: number) => {
+    setCurrentPageState(pageNumber);
+  };
 
   return (
     <section
@@ -43,7 +34,7 @@ export const PostsSection: React.FC<PostsSectionProps> = ({ extraClass }) => {
       <Pagination
         onClick={handleChangePage}
         currentPageState={currentPageState}
-        pagesAmount={Math.floor(posts.length / postsAmount)}
+        pagesAmount={Math.floor(posts.length / +postsAmount)}
       />
     </section>
   );

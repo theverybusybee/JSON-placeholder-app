@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import styles from './index.module.scss';
-import { ButtonShape, type ButtonProps } from './types';
+import { ButtonShape, type ButtonProps, ButtonBorderStyle } from './types';
 import ArrowDown from 'assets/images/icons/arrow-down.svg?react';
 
 export const Button: React.FC<ButtonProps> = ({
@@ -9,6 +9,7 @@ export const Button: React.FC<ButtonProps> = ({
   onMouseOver,
   onMouseOut,
   shape = ButtonShape.Rounded,
+  borderStyle,
   hasArrow = false,
   isActive = false,
   extraClass,
@@ -17,6 +18,7 @@ export const Button: React.FC<ButtonProps> = ({
     styles.button,
     {
       [styles['button_shape' + shape]]: shape,
+      [styles['button_borderStyle' + borderStyle]]: borderStyle,
       [styles.button_active]: isActive,
     },
     extraClass,

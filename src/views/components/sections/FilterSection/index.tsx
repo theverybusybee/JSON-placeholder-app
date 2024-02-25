@@ -18,7 +18,6 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
 }) => {
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const users = useAppSelector(selectUsers);
-  console.log(isDropDownActive);
 
   const openDropDownMenu = () => {
     setIsDropDownActive(true);

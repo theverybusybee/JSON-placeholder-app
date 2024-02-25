@@ -48,7 +48,7 @@ export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
               onDelete={() => handleDelete(id)}
               onLike={() => handleFavorites(id)}
               comments={feedback.length ? feedback : []}
-            ></Post>
+            />
           </li>
         );
       })}

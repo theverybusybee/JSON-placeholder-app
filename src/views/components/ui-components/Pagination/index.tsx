@@ -26,7 +26,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             >
               <button
                 className={styles.button}
-                onClick={(e) => onClick(e, page.number)}
+                onClick={() => onClick(page.number)}
               >
                 {page.number}
               </button>
