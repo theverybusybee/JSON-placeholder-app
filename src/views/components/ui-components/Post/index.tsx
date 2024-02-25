@@ -3,14 +3,13 @@ import { Checkbox } from '../Checkbox';
 import styles from './index.module.scss';
 import type { PostProps } from './types';
 import { Button } from '../Button';
-import Arrow from 'assets/images/icons/arrow-down.svg?react';
 import BinIcon from 'assets/images/icons/bin-icon.svg?react';
 import EditIcon from 'assets/images/icons/edit-icon.svg?react';
 import HeartIcon from 'assets/images/icons/heart-icon.svg?react';
 import HeartIconSolid from 'assets/images/icons/heart-icon-solid.svg?react';
-
-import { ButtonBorderStyle, ButtonShape } from '../Button/types';
+import { ButtonShape } from '../Button/types';
 import { FeedbackList } from 'views/components/sections/FeedbackList';
+import clsx from 'clsx';
 
 export const Post: React.FC<PostProps> = ({
   user,
@@ -25,9 +24,15 @@ export const Post: React.FC<PostProps> = ({
   comments,
 }) => {
   const [isFeedbackOpened, setIsFeedbackOpened] = useState<boolean>(false);
+  const articleClass = clsx(styles.article, {
+    [styles.article_extended]: isFeedbackOpened,
+  });
+  const feedbackButtonWrapperClass = clsx(styles.feedbackButtonWrapper, {
+    [styles.feedbackButtonWrapper_active]: isFeedbackOpened,
+  });
 
   return (
-    <article className={styles.article}>
+    <article className={articleClass}>
       <div className={styles.usernameContainer}>
         <p className={`${styles.content} ${styles.content_bold}`}>{user}</p>
         <p className={styles.content}>@{username}</p>
@@ -53,9 +58,7 @@ export const Post: React.FC<PostProps> = ({
         <p className={styles.content}>{content}</p>
       </div>
 
-      <div
-        className={`${styles.feedbackButtonWrapper} ${isFeedbackOpened ? styles.feedbackButtonWrapper_active : ''}`}
-      >
+      <div className={feedbackButtonWrapperClass}>
         <Button
           extraClass={`${styles.feedbackButton}`}
           content="Показать комментарии"
@@ -63,9 +66,8 @@ export const Post: React.FC<PostProps> = ({
           onClick={() => {
             setIsFeedbackOpened(!isFeedbackOpened);
           }}
-          borderStyle={ButtonBorderStyle.Gradient}
+          hasArrow={true}
           isActive={isFeedbackOpened}
-          Icon={Arrow}
         />
       </div>
 

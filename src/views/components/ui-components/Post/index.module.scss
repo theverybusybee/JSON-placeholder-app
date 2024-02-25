@@ -9,15 +9,22 @@
   grid-template-areas:
     'usernames icon-buttons'
     'post-container post-container'
-    'feedback-button checkbox-container'
-    'feedback-list feedback-list';
+    'feedback-button checkbox-container';
+
   gap: 24px;
   border-radius: 8px;
-
   @include addGradientBorder($eerie-color, $main-gradient, 8px, 8px, 1px, -2);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
   color: $dust-color;
+
+  &_extended {
+    grid-template-areas:
+      'usernames icon-buttons'
+      'post-container post-container'
+      'feedback-button checkbox-container'
+      'feedback-list feedback-list';
+  }
 
   .usernameContainer,
   .postContainer {
@@ -95,6 +102,8 @@
   }
 
   .feedbackList {
+    // display: flex;
+    // flex-direction: column;
     margin-top: -16px;
     grid-area: feedback-list;
   }
