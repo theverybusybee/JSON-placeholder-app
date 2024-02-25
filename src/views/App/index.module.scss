@@ -1,7 +1,8 @@
-.posts {
+.main {
+  max-width: 1192px;
+  padding-inline: 40px;
+  margin: 64px auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 1000px;
-  padding: 1px;
+  gap: 40px;
 }
