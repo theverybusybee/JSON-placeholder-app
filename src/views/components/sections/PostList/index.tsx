@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   deletePostAsync,
   selectComments,
-  selectPosts,
   selectUsers,
   toggleFavorites,
   toggleIsChecked,
@@ -13,9 +12,8 @@ import {
 import clsx from 'clsx';
 import { useCallback } from 'react';
 
-export const PostList: React.FC<PostListProps> = ({ extraClass }) => {
+export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector(selectPosts);
   const users = useAppSelector(selectUsers);
   const comments = useAppSelector(selectComments);
 
