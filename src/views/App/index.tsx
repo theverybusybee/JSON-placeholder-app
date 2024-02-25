@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import styles from './index.module.scss';
-import { Post } from 'views/components/ui-components/Post';
 import { useAppDispatch } from 'app/hooks';
 import {
   getPostsAsync,
@@ -8,7 +7,7 @@ import {
   getCommentsAsync,
 } from 'slices/postsSlice';
 import { FilterSection } from 'views/components/sections/FilterSection';
-import { PostList } from 'views/components/sections/PostList';
+import { PostsSection } from 'views/components/sections/PostsSection';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -17,6 +16,7 @@ const App = () => {
     dispatch(getPostsAsync());
     dispatch(getUsersAsync());
     dispatch(getCommentsAsync());
+    localStorage.setItem('postsAmount', '10');
   }, []);
 
   return (
@@ -28,7 +28,7 @@ const App = () => {
         onFavoritesFilter={() => {}}
         onUsernameFilter={() => {}}
       />
-      <PostList />
+      <PostsSection />
     </main>
   );
 };

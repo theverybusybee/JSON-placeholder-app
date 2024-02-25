@@ -6,3 +6,9 @@ export const checkResponse = (res: Response) => {
   }
   return Promise.reject(res);
 };
+
+export const generateId = (): string => {
+  return (
+    Math.random().toString(16).slice(2) + new Date().getTime().toString(36)
+  );
+};
