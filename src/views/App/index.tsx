@@ -13,6 +13,7 @@ import {
   toggleFavorites,
   toggleIsChecked,
 } from 'slices/postsSlice';
+import { SubmitInput } from 'views/components/ui-components/SubmitInput';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -40,6 +41,7 @@ const App = () => {
 
   return (
     <div>
+      <SubmitInput value="kkfdf" onChange={() => {}} onSubmit={() => {}} />
       <ul className={styles.posts}>
         {posts.length > 0 ? (
           posts.map((post) => {

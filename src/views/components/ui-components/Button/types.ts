@@ -1,5 +1,3 @@
-import { ReactComponentElement, ReactSVGElement } from 'react';
-
 export interface ButtonProps {
   content: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
