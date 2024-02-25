@@ -1,0 +1,45 @@
+@import '/src/styles/variables/index';
+@import '/src/styles/mixins/gradient-border';
+
+.dropdown {
+  margin-top: 1px;
+  margin-top: 1px;
+  max-width: 300px;
+
+  // height: 300px;
+
+  border-radius: 28px;
+  position: relative;
+  // border: 1px solid magenta;
+  @include addGradientBorder($eerie-color, $main-gradient, 28px, 28px, 1px, -2);
+  // &::after, &::before {
+  //     overflow-y: hidden;
+  // }
+
+  .buttonList {
+    padding: 12px;
+    width: 100%;
+    max-height: 240px;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .buttonItem {
+      padding: 12px 16px;
+      border-radius: 64px;
+      border: 1px solid $carbon-color;
+      font: $buttonFontStyle;
+
+      cursor: pointer;
+      &:hover {
+        border-color: transparent;
+        background-color: $carbon-color;
+      }
+      .button {
+        color: $white-color;
+      }
+    }
+  }
+}
