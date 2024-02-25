@@ -6,13 +6,14 @@ export const SubmitInput: React.FC<SubmitInputProps> = ({
   value,
   onChange,
   onSubmit,
+  placeholder,
 }) => {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <label className={styles.label}>
         <input
           className={styles.input}
-          placeholder="Type your task..."
+          placeholder={placeholder && placeholder}
           type="text"
           value={value}
           name="tasksSubmitInput"
