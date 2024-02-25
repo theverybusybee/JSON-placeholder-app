@@ -3,7 +3,12 @@ export interface PostProps {
   username: string;
   title: string;
   content: string;
-  comments?: {
+  isFavorite: boolean;
+  isChecked: boolean;
+  onDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onLike: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onCheck: () => void;
+  comments: {
     postId: number;
     id: number;
     name: string;

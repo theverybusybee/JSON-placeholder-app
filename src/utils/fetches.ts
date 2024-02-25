@@ -1,7 +1,7 @@
 import { baseUrl, checkResponse } from './constants';
 
 type TRequestOptions = {
-  method: 'POST' | 'GET' | 'PATCH';
+  method: 'POST' | 'GET' | 'PATCH' | 'DELETE';
   mode: RequestMode | undefined;
   cache: RequestCache | undefined;
   credentials: RequestCredentials | undefined;
@@ -56,5 +56,20 @@ export const getComments = async () => {
   };
 
   const res = await fetch(`${baseUrl}/comments`, requestOptions);
+  return checkResponse(res);
+};
+
+export const deletePost = async (postId: number) => {
+  const requestOptions: TRequestOptions = {
+    method: 'DELETE',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const res = await fetch(`${baseUrl}/posts/${postId}`, requestOptions);
   return checkResponse(res);
 };

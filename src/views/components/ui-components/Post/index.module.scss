@@ -9,7 +9,8 @@
   grid-template-areas:
     'usernames icon-buttons'
     'post-container post-container'
-    'feedback-button checkbox-container';
+    'feedback-button checkbox-container'
+    'feedback-list feedback-list';
   gap: 24px;
   border-radius: 8px;
 
@@ -68,16 +69,22 @@
     }
   }
 
-  .feedbackButton {
+  .feedbackButtonWrapper {
+    max-width: fit-content;
+    border-radius: 8px 8px 0 0;
     grid-area: feedback-button;
-    @include addGradientBorder(
-      $eerie-color,
-      $button-disabled-gradient,
-      8px,
-      8px,
-      1px,
-      -2
-    );
+    transition: padding 0.3s;
+
+    &_active {
+      margin-bottom: -8px;
+      padding: 8px;
+      background-color: $carbon-color;
+    }
+
+    .feedbackButton {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
   }
 
   .checkboxContainer {
@@ -85,6 +92,11 @@
     display: flex;
     gap: 18px;
     align-items: center;
+  }
+
+  .feedbackList {
+    margin-top: -16px;
+    grid-area: feedback-list;
   }
 }
 
@@ -94,18 +106,28 @@
       'icon-buttons checkbox-container'
       'usernames .'
       'post-container post-container'
-      'feedback-button feedback-button';
+      'feedback-button feedback-button'
+      'feedback-list feedback-list';
 
-    .feedbackButton {
+    .buttonContainer {
+      justify-content: start;
+    }
+
+    .feedbackButtonWrapper {
       max-width: 100%;
+      position: relative;
+
+      .feedbackButton {
+        max-width: 100%;
+      }
+    }
+
+    .feedbackList {
+      border-top-right-radius: 0;
     }
 
     .checkboxContainer {
       gap: 12px;
-    }
-
-    .buttonContainer {
-      justify-content: start;
     }
   }
 }
