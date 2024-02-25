@@ -1,22 +1,36 @@
+import clsx from 'clsx';
 import styles from './index.module.scss';
 import { ButtonShape, type ButtonProps } from './types';
+import ArrowDown from 'assets/images/icons/arrow-down.svg?react';
 
 export const Button: React.FC<ButtonProps> = ({
   content,
   onClick,
+  onMouseOver,
+  onMouseOut,
   shape = ButtonShape.Rounded,
-  Icon,
+  hasArrow = false,
   isActive = false,
-  borderStyle,
   extraClass,
 }) => {
+  const buttonClass = clsx(
+    styles.button,
+    {
+      [styles['button_shape' + shape]]: shape,
+      [styles.button_active]: isActive,
+    },
+    extraClass,
+  );
+
   return (
     <button
-      className={`${styles.button} ${styles['button' + shape]} ${styles['button' + borderStyle]} ${isActive ? styles.button_active : ''} ${extraClass}`}
+      className={buttonClass}
       onClick={onClick}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
     >
       {content}
-      {Icon && <Icon className={styles.icon} />}
+      {hasArrow && <ArrowDown className={styles.icon} />}
     </button>
   );
 };
