@@ -1,11 +1,11 @@
+import type { Direction } from 'slices/postsTypes';
+
 export interface SortSectionProps {
-  extraClass?: string;
   allPostsAmount: string;
-  sortState: SortState;
-  setSortState: (sortState: SortState) => void;
+  extraClass?: string;
 }
 
 export type SortState = {
-  direction: 'ascending' | 'descending';
+  direction: Direction;
   pagesAmount: string;
 };

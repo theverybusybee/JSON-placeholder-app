@@ -31,6 +31,11 @@ export interface User {
   };
 }
 
+export enum Direction {
+  Ascending = 'ascending',
+  Descending = 'descending',
+}
+
 export interface Comment {
   postId: number;
   id: number;
@@ -44,4 +49,10 @@ export interface PostsSliceState {
   users: User[];
   comments: Comment[];
   status: 'idle' | 'loading' | 'failed';
+  filter: {
+    searchRequest: string;
+    direction: Direction;
+    username: string;
+    postsAmount: string;
+  };
 }

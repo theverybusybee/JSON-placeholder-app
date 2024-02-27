@@ -65,7 +65,6 @@
     &.button_shape {
       &_rounded-square {
         border-radius: 8px;
-        // border-color: $carbon-color;
 
         @include defineButtonBorderStyle(
           roundedSquare,
@@ -75,7 +74,6 @@
       }
       &_rounded {
         border-radius: 64px;
-        // border-color: $carbon-color;
 
         @include defineButtonBorderStyle(
           rounded,

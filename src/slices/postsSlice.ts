@@ -1,13 +1,28 @@
-import { createReducer, type PayloadAction } from '@reduxjs/toolkit';
+import { type PayloadAction } from '@reduxjs/toolkit';
 import { createAppSlice } from 'app/createAppSlice';
 import { deletePost, getComments, getPosts, getUsers } from 'utils/fetches';
-import type { Post, PostsSliceState, User, Comment } from './postsTypes';
+import {
+  type Post,
+  type PostsSliceState,
+  type User,
+  type Comment,
+  Direction,
+} from './postsTypes';
 
 const initialState: PostsSliceState = {
   posts: [],
   users: [],
   comments: [],
   status: 'idle',
+  filter: {
+    searchRequest: '',
+    direction: Direction.Ascending,
+    username: '',
+    postsAmount:
+      localStorage.getItem('postsAmount') === null
+        ? '10'
+        : localStorage.getItem('postsAmount')!,
+  },
 };
 
 export const postsSlice = createAppSlice({
@@ -113,6 +128,29 @@ export const postsSlice = createAppSlice({
         },
       },
     ),
+
+    setSearchRequest: create.reducer<string>(
+      (state, action: PayloadAction<string>) => {
+        state.filter.searchRequest = action.payload;
+      },
+    ),
+
+    setDirection: create.reducer<Direction>(
+      (state, action: PayloadAction<Direction>) => {
+        state.filter.direction = action.payload;
+      },
+    ),
+
+    setUsername: create.reducer<string>(
+      (state, action: PayloadAction<string>) => {
+        state.filter.username = action.payload;
+      },
+    ),
+    setPostsAmount: create.reducer<string>(
+      (state, action: PayloadAction<string>) => {
+        state.filter.postsAmount = action.payload;
+      },
+    ),
   }),
 
   selectors: {
@@ -120,6 +158,7 @@ export const postsSlice = createAppSlice({
     selectUsers: (posts) => posts.users,
     selectComments: (posts) => posts.comments,
     selectStatus: (posts) => posts.status,
+    selectFilter: (posts) => posts.filter,
   },
 });
 
@@ -130,7 +169,16 @@ export const {
   deletePostAsync,
   toggleFavorites,
   toggleIsChecked,
+  setSearchRequest,
+  setDirection,
+  setUsername,
+  setPostsAmount,
 } = postsSlice.actions;
 
-export const { selectPosts, selectUsers, selectComments, selectStatus } =
-  postsSlice.selectors;
+export const {
+  selectPosts,
+  selectUsers,
+  selectComments,
+  selectStatus,
+  selectFilter,
+} = postsSlice.selectors;

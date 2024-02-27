@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from './index.module.scss';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
@@ -6,22 +6,17 @@ import {
   getUsersAsync,
   getCommentsAsync,
   selectPosts,
+  selectFilter,
 } from 'slices/postsSlice';
 import { FilterSection } from 'views/components/sections/FilterSection';
 import { PostsSection } from 'views/components/sections/PostsSection';
 import { SortSection } from 'views/components/sections/SortSection';
 import { handlePostsAmount } from 'utils/constants';
-import type { SortState } from 'views/components/sections/SortSection/types';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const postsAmount = localStorage.getItem('postsAmount');
-
+  const { postsAmount } = useAppSelector(selectFilter);
   const posts = useAppSelector(selectPosts);
-  const [sortState, setSortState] = useState<SortState>({
-    direction: 'ascending',
-    pagesAmount: postsAmount ? postsAmount : '10',
-  });
 
   useEffect(() => {
     dispatch(getPostsAsync());
@@ -30,8 +25,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    handlePostsAmount(sortState.pagesAmount);
-  }, [sortState.pagesAmount]);
+    handlePostsAmount(postsAmount);
+  }, [postsAmount]);
 
   return (
     <main className={styles.main}>
@@ -42,12 +37,8 @@ const App = () => {
         onFavoritesFilter={() => {}}
         onUsernameFilter={() => {}}
       />
-      <SortSection
-        setSortState={setSortState}
-        sortState={sortState}
-        allPostsAmount={posts.length.toString()}
-      />
-      <PostsSection postsAmount={sortState.pagesAmount} />
+      <SortSection allPostsAmount={posts.length.toString()} />
+      <PostsSection postsAmount={postsAmount} />
     </main>
   );
 };
