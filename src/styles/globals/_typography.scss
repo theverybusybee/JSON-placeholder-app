@@ -27,10 +27,21 @@ button {
   border-width: 0;
   background-color: transparent;
   cursor: pointer;
+
+  &:focus {
+    outline-color: $teal-color;
+    outline-width: 1px;
+  }
 }
 
 input {
   padding: 0;
+
+  &:focus,
+  &:focus-visible {
+    outline-color: $teal-color;
+    outline-width: thin;
+  }
 }
 
 input[type='checkbox'] {

@@ -1,6 +1,13 @@
+@import '/src/styles/variables';
+
 .section {
   display: flex;
   flex-direction: column;
   gap: 64px;
   align-items: center;
+}
+
+.content {
+  font: $contentFontStyleRegular;
+  color: $dust-color;
 }
