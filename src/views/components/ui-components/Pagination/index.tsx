@@ -9,7 +9,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   pagesAmount,
   extraClass,
 }) => {
-  const pagesArr = [...Array(pagesAmount).keys()].map((i) => {
+  const pagesArr = [...Array(pagesAmount ? pagesAmount : 1).keys()].map((i) => {
     return { number: i + 1, id: generateId() };
   });
 

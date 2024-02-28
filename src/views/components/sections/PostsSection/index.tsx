@@ -41,6 +41,8 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       : posts.length / +postsAmount,
   );
 
+  console.log(pagesAmount);
+
   return (
     <section
       className={clsx([styles.section, extraClass])}
@@ -54,7 +56,7 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       <Pagination
         onClick={handleChangePage}
         currentPageState={currentPageState}
-        pagesAmount={pagesAmount && !currentPosts.length ? pagesAmount : 1}
+        pagesAmount={currentPosts.length ? pagesAmount : 1}
       />
     </section>
   );
