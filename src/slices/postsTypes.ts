@@ -36,6 +36,12 @@ export enum Direction {
   Descending = 'descending',
 }
 
+export enum Status {
+  Idle = 'idle',
+  Loading = 'loading',
+  Failed = 'failed',
+}
+
 export interface Comment {
   postId: number;
   id: number;
@@ -44,15 +50,22 @@ export interface Comment {
   body: string;
 }
 
+export interface Filter {
+  isActive: boolean;
+  params: {
+    searchRequest: string;
+    direction: Direction;
+    username: string;
+    isFavorites: boolean;
+  };
+}
+
 export interface PostsSliceState {
   posts: Post[];
   users: User[];
   comments: Comment[];
-  status: 'idle' | 'loading' | 'failed';
-  filter: {
-    searchRequest: string;
-    direction: Direction;
-    username: string;
-    postsAmount: string;
-  };
+  status: Status;
+  postsAmount: string;
+  filter: Filter;
+  filteredPosts: Post[];
 }

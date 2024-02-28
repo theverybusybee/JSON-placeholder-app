@@ -1,6 +1,6 @@
 export interface ButtonProps {
   content: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onMouseOver?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onMouseOut?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   shape?: ButtonShape;

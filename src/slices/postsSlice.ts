@@ -7,22 +7,29 @@ import {
   type User,
   type Comment,
   Direction,
+  Status,
 } from './postsTypes';
 
 const initialState: PostsSliceState = {
   posts: [],
   users: [],
   comments: [],
-  status: 'idle',
+  status: Status.Idle,
+  postsAmount:
+    !localStorage.getItem('postsAmount') === null ||
+    localStorage.getItem('postsAmount') === 'undefined'
+      ? '10'
+      : localStorage.getItem('postsAmount')!,
   filter: {
-    searchRequest: '',
-    direction: Direction.Ascending,
-    username: '',
-    postsAmount:
-      localStorage.getItem('postsAmount') === null
-        ? '10'
-        : localStorage.getItem('postsAmount')!,
+    isActive: false,
+    params: {
+      searchRequest: '',
+      direction: Direction.Ascending,
+      username: '',
+      isFavorites: false,
+    },
   },
+  filteredPosts: [],
 };
 
 export const postsSlice = createAppSlice({
@@ -56,16 +63,16 @@ export const postsSlice = createAppSlice({
       },
       {
         pending: (state) => {
-          state.status = 'loading';
+          state.status = Status.Loading;
         },
         fulfilled: (state, action) => {
-          state.status = 'idle';
+          state.status = Status.Idle;
           state.posts = action.payload.map((post) => {
             return { ...post, isFavorite: false, isChecked: false };
           });
         },
         rejected: (state) => {
-          state.status = 'failed';
+          state.status = Status.Failed;
         },
       },
     ),
@@ -77,14 +84,14 @@ export const postsSlice = createAppSlice({
       },
       {
         pending: (state) => {
-          state.status = 'loading';
+          state.status = Status.Loading;
         },
         fulfilled: (state, action) => {
-          state.status = 'idle';
+          state.status = Status.Loading;
           state.comments = action.payload;
         },
         rejected: (state) => {
-          state.status = 'failed';
+          state.status = Status.Failed;
         },
       },
     ),
@@ -96,14 +103,14 @@ export const postsSlice = createAppSlice({
       },
       {
         pending: (state) => {
-          state.status = 'loading';
+          state.status = Status.Loading;
         },
         fulfilled: (state, action) => {
-          state.status = 'idle';
+          state.status = Status.Idle;
           state.users = action.payload;
         },
         rejected: (state) => {
-          state.status = 'failed';
+          state.status = Status.Failed;
         },
       },
     ),
@@ -115,42 +122,96 @@ export const postsSlice = createAppSlice({
       },
       {
         pending: (state) => {
-          state.status = 'loading';
+          state.status = Status.Loading;
         },
         fulfilled: (state, action) => {
-          state.status = 'idle';
+          state.status = Status.Idle;
           state.posts = state.posts.filter(
             (post) => post.id !== action.payload,
           );
         },
         rejected: (state) => {
-          state.status = 'failed';
+          state.status = Status.Failed;
         },
       },
     ),
 
-    setSearchRequest: create.reducer<string>(
+    setFilterSearchRequest: create.reducer<string>(
       (state, action: PayloadAction<string>) => {
-        state.filter.searchRequest = action.payload;
+        if (!state.filter.isActive) state.filter.isActive = true;
+        state.filter.params.searchRequest = action.payload;
+        // filter()
       },
     ),
 
-    setDirection: create.reducer<Direction>(
+    setFilterDirection: create.reducer<Direction>(
       (state, action: PayloadAction<Direction>) => {
-        state.filter.direction = action.payload;
+        if (!state.filter.isActive) state.filter.isActive = true;
+        state.filter.params.direction = action.payload;
+        // filter()
       },
     ),
 
-    setUsername: create.reducer<string>(
+    setFilterUsername: create.reducer<string>(
       (state, action: PayloadAction<string>) => {
-        state.filter.username = action.payload;
+        if (!state.filter.isActive) state.filter.isActive = true;
+        state.filter.params.username = action.payload;
+        // filter()
       },
     ),
-    setPostsAmount: create.reducer<string>(
+
+    setFilterPostsAmount: create.reducer<string>(
       (state, action: PayloadAction<string>) => {
-        state.filter.postsAmount = action.payload;
+        state.postsAmount = action.payload;
       },
     ),
+
+    toggleFilterIsFavorites: create.reducer((state) => {
+      if (!state.filter.isActive) state.filter.isActive = true;
+      state.filter.params.isFavorites = !state.filter.params.isFavorites;
+    }),
+
+    filter: create.reducer((state) => {
+      const { direction, isFavorites, searchRequest, username } =
+        state.filter.params;
+
+      if (direction === Direction.Ascending) {
+        state.filteredPosts = state.posts.sort(
+          (prevPost, currPost) => prevPost.id - currPost.id,
+        );
+      }
+
+      if (direction === Direction.Descending) {
+        state.filteredPosts = state.posts.sort(
+          (prevPost, currPost) => currPost.id - prevPost.id,
+        );
+      }
+
+      if (isFavorites) {
+        state.filteredPosts = state.filteredPosts.filter(
+          (post) => post.isFavorite,
+        );
+      }
+
+      if (searchRequest) {
+        const searchRequestExp = new RegExp(searchRequest, 'g');
+
+        state.filteredPosts = state.filteredPosts.filter((post) =>
+          searchRequestExp.test(post.title),
+        );
+      }
+
+      if (username) {
+        const user = state.users.find(
+          (user) => user.name === state.filter.params.username,
+        );
+        if (!user) return;
+
+        state.filteredPosts = state.filteredPosts.filter(
+          (post) => post.userId === user.id,
+        );
+      }
+    }),
   }),
 
   selectors: {
@@ -159,6 +220,8 @@ export const postsSlice = createAppSlice({
     selectComments: (posts) => posts.comments,
     selectStatus: (posts) => posts.status,
     selectFilter: (posts) => posts.filter,
+    selectFilteredPosts: (posts) => posts.filteredPosts,
+    selectPostsAmount: (posts) => posts.postsAmount,
   },
 });
 
@@ -169,10 +232,12 @@ export const {
   deletePostAsync,
   toggleFavorites,
   toggleIsChecked,
-  setSearchRequest,
-  setDirection,
-  setUsername,
-  setPostsAmount,
+  setFilterSearchRequest,
+  setFilterDirection,
+  setFilterUsername,
+  setFilterPostsAmount,
+  toggleFilterIsFavorites,
+  filter,
 } = postsSlice.actions;
 
 export const {
@@ -181,4 +246,6 @@ export const {
   selectComments,
   selectStatus,
   selectFilter,
+  selectFilteredPosts,
+  selectPostsAmount,
 } = postsSlice.selectors;

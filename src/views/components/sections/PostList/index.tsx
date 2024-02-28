@@ -4,6 +4,7 @@ import { Post } from 'views/components/ui-components/Post';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   deletePostAsync,
+  filter,
   selectComments,
   selectUsers,
   toggleFavorites,
@@ -19,14 +20,17 @@ export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
 
   const handleDelete = useCallback((postId: number) => {
     dispatch(deletePostAsync(postId));
+    dispatch(filter());
   }, []);
 
   const handleFavorites = useCallback((postId: number) => {
     dispatch(toggleFavorites(postId));
+    dispatch(filter());
   }, []);
 
   const handleCheck = useCallback((postId: number) => {
     dispatch(toggleIsChecked(postId));
+    dispatch(filter());
   }, []);
 
   return (

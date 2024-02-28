@@ -5,38 +5,40 @@ import { Button } from 'views/components/ui-components/Button';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { Dropdown } from 'views/components/ui-components/Dropdown';
-import { useAppSelector } from 'app/hooks';
-import { selectUsers } from 'slices/postsSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import {
+  filter,
+  selectFilter,
+  selectUsers,
+  setFilterSearchRequest,
+  toggleFilterIsFavorites,
+} from 'slices/postsSlice';
 
-export const FilterSection: React.FC<FilterSectionProps> = ({
-  value,
-  onChange,
-  onSubmit,
-  onUsernameFilter,
-  onFavoritesFilter,
-  extraClass,
-}) => {
+export const FilterSection: React.FC<FilterSectionProps> = ({ extraClass }) => {
+  const dispatch = useAppDispatch();
+  const { params: filterParams } = useAppSelector(selectFilter);
   const [isDropDownActive, setIsDropDownActive] = useState(false);
   const users = useAppSelector(selectUsers);
 
-  const openDropDownMenu = () => {
-    setIsDropDownActive(true);
+  const toggleDropDownMenu = () => {
+    setIsDropDownActive((prev) => !prev);
   };
 
-  const closeDropDownMenu = () => {
-    setIsDropDownActive(false);
-  };
-
-  const [inputState, setInputState] = useState<string>('');
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputState(e.target.value);
+    dispatch(setFilterSearchRequest(e.target.value));
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!inputState) return;
-    setInputState('');
+    if (!filterParams.searchRequest) return;
+    dispatch(filter());
+    dispatch(setFilterSearchRequest(''));
   }
+
+  const handleFilterByFavorites = () => {
+    dispatch(toggleFilterIsFavorites());
+    dispatch(filter());
+  };
 
   return (
     <section
@@ -44,30 +46,30 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
       aria-label="Поиск по постам"
     >
       <SubmitInput
-        value={inputState}
+        value={filterParams.searchRequest}
         onChange={handleInputChange}
         onSubmit={handleSubmit}
         placeholder={'Введите название поста'}
       />
       <div
         className={styles.dropdownContainer}
-        onMouseOut={closeDropDownMenu}
-        onMouseOver={openDropDownMenu}
+        onMouseOut={toggleDropDownMenu}
+        onMouseOver={toggleDropDownMenu}
       >
         <Button
-          content="по имени"
+          content={filterParams.username ? filterParams.username : 'по имени'}
           extraClass={styles.button}
-          onClick={onUsernameFilter}
           hasArrow={true}
           isActive={isDropDownActive}
         />
-        {isDropDownActive && <Dropdown users={users} onClick={() => {}} />}
+        {isDropDownActive && <Dropdown users={users} />}
       </div>
 
       <Button
         content="избранное"
         extraClass={styles.button}
-        onClick={onFavoritesFilter}
+        isActive={filterParams.isFavorites}
+        onClick={handleFilterByFavorites}
       />
     </section>
   );

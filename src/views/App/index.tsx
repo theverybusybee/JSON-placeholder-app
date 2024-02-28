@@ -6,7 +6,7 @@ import {
   getUsersAsync,
   getCommentsAsync,
   selectPosts,
-  selectFilter,
+  selectPostsAmount,
 } from 'slices/postsSlice';
 import { FilterSection } from 'views/components/sections/FilterSection';
 import { PostsSection } from 'views/components/sections/PostsSection';
@@ -15,7 +15,7 @@ import { handlePostsAmount } from 'utils/constants';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const { postsAmount } = useAppSelector(selectFilter);
+  const postsAmount = useAppSelector(selectPostsAmount);
   const posts = useAppSelector(selectPosts);
 
   useEffect(() => {
@@ -32,8 +32,6 @@ const App = () => {
     <main className={styles.main}>
       <FilterSection
         value="kkfdf"
-        onChange={() => {}}
-        onSubmit={() => {}}
         onFavoritesFilter={() => {}}
         onUsernameFilter={() => {}}
       />

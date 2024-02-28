@@ -4,7 +4,15 @@ import { Button } from 'views/components/ui-components/Button';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Direction } from 'slices/postsTypes';
-import { selectFilter, setDirection, setPostsAmount } from 'slices/postsSlice';
+import {
+  filter,
+  selectFilter,
+  selectFilteredPosts,
+  selectPosts,
+  selectPostsAmount,
+  setFilterDirection,
+  setFilterPostsAmount,
+} from 'slices/postsSlice';
 
 const buttonsAmountMockData = [
   { amount: '10' },
@@ -20,19 +28,37 @@ export const SortSection: React.FC<SortSectionProps> = ({
   extraClass,
 }) => {
   const dispatch = useAppDispatch();
-  const { postsAmount } = useAppSelector(selectFilter);
+  const posts = useAppSelector(selectPosts);
+  const filteredPosts = useAppSelector(selectFilteredPosts);
+  const postsAmount = useAppSelector(selectPostsAmount);
+
+  const { params: filterParams } = useAppSelector(selectFilter);
+  console.log(filteredPosts);
+  console.log(posts);
+
+  const handleSortAscending = () => {
+    dispatch(setFilterDirection(Direction.Ascending));
+    dispatch(filter());
+  };
+
+  const handleSortDescending = () => {
+    dispatch(setFilterDirection(Direction.Descending));
+    dispatch(filter());
+  };
 
   return (
     <section className={clsx(styles.section, extraClass)}>
       <article className={styles.buttonsContainer}>
         <p>направление:</p>
         <Button
+          isActive={filterParams.direction === Direction.Ascending}
           content="возрастание"
-          onClick={() => dispatch(setDirection(Direction.Ascending))}
+          onClick={() => handleSortAscending()}
         />
         <Button
+          isActive={filterParams.direction === Direction.Descending}
           content="убывание"
-          onClick={() => dispatch(setDirection(Direction.Descending))}
+          onClick={() => handleSortDescending()}
         />
       </article>
       <article className={styles.buttonsContainer}>
@@ -46,7 +72,7 @@ export const SortSection: React.FC<SortSectionProps> = ({
             }
             onClick={() => {
               dispatch(
-                setPostsAmount(
+                setFilterPostsAmount(
                   el.amount === 'все' ? allPostsAmount : el.amount.toString(),
                 ),
               );
