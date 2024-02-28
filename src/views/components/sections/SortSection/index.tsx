@@ -49,20 +49,20 @@ export const SortSection: React.FC<SortSectionProps> = ({
   return (
     <section className={clsx(styles.section, extraClass)}>
       <article className={styles.buttonsContainer}>
-        <p>направление:</p>
+        <p>direction:</p>
         <Button
           isActive={filterParams.direction === Direction.Ascending}
-          content="возрастание"
+          content="ascending"
           onClick={() => handleSortAscending()}
         />
         <Button
           isActive={filterParams.direction === Direction.Descending}
-          content="убывание"
+          content="descending"
           onClick={() => handleSortDescending()}
         />
       </article>
       <article className={styles.buttonsContainer}>
-        <p>количество постов на странице:</p>
+        <p>posts shown per page:</p>
         {buttonsAmountMockData.map((el, index) => (
           <Button
             content={el.amount}

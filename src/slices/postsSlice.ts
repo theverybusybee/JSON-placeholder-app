@@ -140,7 +140,6 @@ export const postsSlice = createAppSlice({
       (state, action: PayloadAction<string>) => {
         if (!state.filter.isActive) state.filter.isActive = true;
         state.filter.params.searchRequest = action.payload;
-        // filter()
       },
     ),
 
@@ -148,7 +147,6 @@ export const postsSlice = createAppSlice({
       (state, action: PayloadAction<Direction>) => {
         if (!state.filter.isActive) state.filter.isActive = true;
         state.filter.params.direction = action.payload;
-        // filter()
       },
     ),
 
@@ -156,7 +154,6 @@ export const postsSlice = createAppSlice({
       (state, action: PayloadAction<string>) => {
         if (!state.filter.isActive) state.filter.isActive = true;
         state.filter.params.username = action.payload;
-        // filter()
       },
     ),
 
@@ -212,6 +209,19 @@ export const postsSlice = createAppSlice({
         );
       }
     }),
+
+    skipFilter: create.reducer((state) => {
+      state.filter = {
+        isActive: false,
+        params: {
+          searchRequest: '',
+          direction: Direction.Ascending,
+          username: '',
+          isFavorites: false,
+        },
+      };
+      state.filteredPosts = [];
+    }),
   }),
 
   selectors: {
@@ -238,6 +248,7 @@ export const {
   setFilterPostsAmount,
   toggleFilterIsFavorites,
   filter,
+  skipFilter,
 } = postsSlice.actions;
 
 export const {

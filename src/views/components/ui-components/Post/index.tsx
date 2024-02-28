@@ -61,7 +61,7 @@ export const Post: React.FC<PostProps> = ({
       <div className={feedbackButtonWrapperClass}>
         <Button
           extraClass={`${styles.feedbackButton}`}
-          content="Показать комментарии"
+          content="show comments"
           shape={ButtonShape.RoundedSquare}
           borderStyle={ButtonBorderStyle.Gradient}
           onClick={() => {
@@ -73,7 +73,7 @@ export const Post: React.FC<PostProps> = ({
       </div>
 
       <div className={styles.checkboxContainer}>
-        <p>Выделить пост:</p>
+        <p>Highlight post:</p>
         <Checkbox isChecked={isChecked} setIsChecked={onCheck} />
       </div>
       {isFeedbackOpened && (

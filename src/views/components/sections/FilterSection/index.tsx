@@ -11,14 +11,16 @@ import {
   selectFilter,
   selectUsers,
   setFilterSearchRequest,
+  skipFilter,
   toggleFilterIsFavorites,
 } from 'slices/postsSlice';
 
 export const FilterSection: React.FC<FilterSectionProps> = ({ extraClass }) => {
   const dispatch = useAppDispatch();
   const { params: filterParams } = useAppSelector(selectFilter);
-  const [isDropDownActive, setIsDropDownActive] = useState(false);
   const users = useAppSelector(selectUsers);
+  const { isActive: isFilterActive } = useAppSelector(selectFilter);
+  const [isDropDownActive, setIsDropDownActive] = useState(false);
 
   const toggleDropDownMenu = () => {
     setIsDropDownActive((prev) => !prev);
@@ -43,13 +45,13 @@ export const FilterSection: React.FC<FilterSectionProps> = ({ extraClass }) => {
   return (
     <section
       className={clsx([styles.inputSection, extraClass])}
-      aria-label="Поиск по постам"
+      aria-label="Search by posts"
     >
       <SubmitInput
         value={filterParams.searchRequest}
         onChange={handleInputChange}
         onSubmit={handleSubmit}
-        placeholder={'Введите название поста'}
+        placeholder={"Enter post's title"}
       />
       <div
         className={styles.dropdownContainer}
@@ -57,7 +59,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({ extraClass }) => {
         onMouseOver={toggleDropDownMenu}
       >
         <Button
-          content={filterParams.username ? filterParams.username : 'по имени'}
+          content={filterParams.username ? filterParams.username : 'by name'}
           extraClass={styles.button}
           hasArrow={true}
           isActive={isDropDownActive}
@@ -66,11 +68,18 @@ export const FilterSection: React.FC<FilterSectionProps> = ({ extraClass }) => {
       </div>
 
       <Button
-        content="избранное"
+        content="favorites"
         extraClass={styles.button}
         isActive={filterParams.isFavorites}
         onClick={handleFilterByFavorites}
       />
+      {isFilterActive && (
+        <Button
+          content={'reset'}
+          extraClass={styles.button}
+          onClick={() => dispatch(skipFilter())}
+        />
+      )}
     </section>
   );
 };
