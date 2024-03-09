@@ -17,7 +17,8 @@ const initialState: PostsSliceState = {
   status: Status.Idle,
   postsAmount:
     !localStorage.getItem('postsAmount') === null ||
-    localStorage.getItem('postsAmount') === 'undefined'
+    localStorage.getItem('postsAmount') === 'undefined' ||
+    localStorage.getItem('postsAmount') === 'null'
       ? '10'
       : localStorage.getItem('postsAmount')!,
   filter: {

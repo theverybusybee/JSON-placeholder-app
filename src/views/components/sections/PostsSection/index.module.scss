@@ -1,10 +1,35 @@
 @import '/src/styles/variables';
 
 .section {
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
+  display: grid;
   align-items: center;
+  grid-template-columns: 1fr min-content;
+  grid-template-areas:
+    'postList buttonContainer'
+    'pagination pagination';
+  gap: 64px 20px;
+  position: relative;
+
+  .buttonContainer {
+    position: sticky;
+    top: 20px;
+    left: 0;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 3;
+    grid-area: buttonContainer;
+  }
+
+  .postList {
+    grid-area: postList;
+  }
+
+  .pagination {
+    grid-area: pagination;
+    justify-self: center;
+  }
 }
 
 .content {

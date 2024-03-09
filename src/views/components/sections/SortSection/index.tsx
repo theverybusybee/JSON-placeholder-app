@@ -33,8 +33,6 @@ export const SortSection: React.FC<SortSectionProps> = ({
   const postsAmount = useAppSelector(selectPostsAmount);
 
   const { params: filterParams } = useAppSelector(selectFilter);
-  console.log(filteredPosts);
-  console.log(posts);
 
   const handleSortAscending = () => {
     dispatch(setFilterDirection(Direction.Ascending));

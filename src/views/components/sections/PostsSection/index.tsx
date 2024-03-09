@@ -10,6 +10,7 @@ import {
 } from 'slices/postsSlice';
 import { useMemo, useState } from 'react';
 import { Pagination } from 'views/components/ui-components/Pagination';
+import { Button } from 'views/components/ui-components/Button';
 
 export const PostsSection: React.FC<PostsSectionProps> = ({
   postsAmount,
@@ -41,19 +42,22 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       : posts.length / +postsAmount,
   );
 
-  console.log(pagesAmount);
-
   return (
     <section
       className={clsx([styles.section, extraClass])}
       aria-label="Список постов"
     >
+      <div className={styles.buttonContainer}>
+        <Button content="delete" />
+        <Button content="like" />
+      </div>
       {currentPosts.length !== 0 ? (
-        <PostList posts={currentPosts} />
+        <PostList extraClass={styles.postList} posts={currentPosts} />
       ) : (
         <p className={styles.content}>Ничего не найдено</p>
       )}
       <Pagination
+        extraClass={styles.pagination}
         onClick={handleChangePage}
         currentPageState={currentPageState}
         pagesAmount={currentPosts.length ? pagesAmount : 1}
