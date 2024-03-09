@@ -3,16 +3,16 @@
 .section {
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr min-content;
+  grid-template-columns: 1fr 100px;
   grid-template-areas:
     'postList buttonContainer'
     'pagination pagination';
-  gap: 64px 20px;
+  gap: 64px 24px;
   position: relative;
 
   .buttonContainer {
     position: sticky;
-    top: 20px;
+    top: 24px;
     left: 0;
     align-self: flex-start;
     display: flex;
@@ -20,6 +20,14 @@
     gap: 24px;
     z-index: 3;
     grid-area: buttonContainer;
+    opacity: 0;
+    transition: all 0.1s ease-in;
+    padding-top: 10px;
+
+    &_active {
+      opacity: 1;
+      padding: 0;
+    }
   }
 
   .postList {

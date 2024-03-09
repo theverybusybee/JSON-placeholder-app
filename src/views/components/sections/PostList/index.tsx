@@ -18,20 +18,29 @@ export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
   const users = useAppSelector(selectUsers);
   const comments = useAppSelector(selectComments);
 
-  const handleDelete = useCallback((postId: number) => {
-    dispatch(deletePostAsync(postId));
-    dispatch(filter());
-  }, []);
+  const handleDelete = useCallback(
+    (postId: number) => {
+      dispatch(deletePostAsync(postId));
+      dispatch(filter());
+    },
+    [dispatch],
+  );
 
-  const handleFavorites = useCallback((postId: number) => {
-    dispatch(toggleFavorites(postId));
-    dispatch(filter());
-  }, []);
+  const handleFavorites = useCallback(
+    (postId: number) => {
+      dispatch(toggleFavorites(postId));
+      dispatch(filter());
+    },
+    [dispatch],
+  );
 
-  const handleCheck = useCallback((postId: number) => {
-    dispatch(toggleIsChecked(postId));
-    dispatch(filter());
-  }, []);
+  const handleCheck = useCallback(
+    (postId: number) => {
+      dispatch(toggleIsChecked(postId));
+      dispatch(filter());
+    },
+    [dispatch],
+  );
 
   return (
     <ul className={clsx(styles.postList, extraClass)}>
