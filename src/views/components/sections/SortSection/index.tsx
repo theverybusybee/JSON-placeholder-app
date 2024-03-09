@@ -7,8 +7,6 @@ import { Direction } from 'slices/postsTypes';
 import {
   filter,
   selectFilter,
-  selectFilteredPosts,
-  selectPosts,
   selectPostsAmount,
   setFilterDirection,
   setFilterPostsAmount,
@@ -28,8 +26,6 @@ export const SortSection: React.FC<SortSectionProps> = ({
   extraClass,
 }) => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector(selectPosts);
-  const filteredPosts = useAppSelector(selectFilteredPosts);
   const postsAmount = useAppSelector(selectPostsAmount);
 
   const { params: filterParams } = useAppSelector(selectFilter);
@@ -61,7 +57,7 @@ export const SortSection: React.FC<SortSectionProps> = ({
       </article>
       <article className={styles.buttonsContainer}>
         <p>posts shown per page:</p>
-        {buttonsAmountMockData.map((el, index) => (
+        {buttonsAmountMockData.map((el) => (
           <Button
             content={el.amount}
             isActive={

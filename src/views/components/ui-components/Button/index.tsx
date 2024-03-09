@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import styles from './index.module.scss';
-import { ButtonShape, type ButtonProps, ButtonBorderStyle } from './types';
+import { ButtonShape, type ButtonProps } from './types';
 import ArrowDown from 'assets/images/icons/arrow-down.svg?react';
 
 export const Button: React.FC<ButtonProps> = ({
