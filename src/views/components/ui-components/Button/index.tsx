@@ -12,6 +12,7 @@ export const Button: React.FC<ButtonProps> = ({
   borderStyle,
   hasArrow = false,
   isActive = false,
+  Icon,
   extraClass,
 }) => {
   const buttonClass = clsx(
@@ -32,7 +33,8 @@ export const Button: React.FC<ButtonProps> = ({
       onMouseOut={onMouseOut}
     >
       {content}
-      {hasArrow && <ArrowDown className={styles.icon} />}
+      {Icon && <Icon className={styles.icon} />}
+      {hasArrow && <ArrowDown className={styles.arrow} />}
     </button>
   );
 };

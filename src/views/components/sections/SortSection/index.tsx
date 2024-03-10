@@ -11,6 +11,8 @@ import {
   setFilterDirection,
   setFilterPostsAmount,
 } from 'slices/postsSlice';
+import { ButtonShape } from 'views/components/ui-components/Button/types';
+import PlusIcon from 'assets/images/icons/plus-icon.svg?react';
 
 const buttonsAmountMockData = [
   { amount: '10' },
@@ -57,8 +59,9 @@ export const SortSection: React.FC<SortSectionProps> = ({
       </article>
       <article className={styles.buttonsContainer}>
         <p>posts shown per page:</p>
-        {buttonsAmountMockData.map((el) => (
+        {buttonsAmountMockData.map((el, index) => (
           <Button
+            key={index}
             content={el.amount}
             isActive={
               el.amount === postsAmount ||
@@ -74,6 +77,12 @@ export const SortSection: React.FC<SortSectionProps> = ({
           />
         ))}
       </article>
+      <Button
+        content="Add new post"
+        shape={ButtonShape.RoundedSquare}
+        Icon={PlusIcon}
+      />
     </section>
   );
 };
+// PlusIcon

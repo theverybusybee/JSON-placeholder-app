@@ -47,7 +47,9 @@
     }
   }
 
+  .arrow,
   .icon {
+    transition: all 0.3s ease;
     path {
       fill: currentColor;
     }
@@ -57,10 +59,14 @@
   &:hover {
     color: $white-color;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    .arrow,
     .icon {
       path {
         fill: $magenta-color;
       }
+    }
+    .icon {
+      transform: rotate(180deg);
     }
     &.button_shape {
       &_rounded-square {
@@ -85,7 +91,7 @@
   }
 
   &_active {
-    .icon {
+    .arrow {
       transform: rotate(180deg);
     }
   }
