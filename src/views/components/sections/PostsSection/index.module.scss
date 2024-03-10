@@ -1,0 +1,46 @@
+@import '/src/styles/variables';
+
+.section {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 100px;
+  grid-template-areas:
+    'postList buttonContainer'
+    'pagination pagination';
+  gap: 64px 24px;
+  position: relative;
+
+  .buttonContainer {
+    position: sticky;
+    top: 24px;
+    left: 0;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 3;
+    grid-area: buttonContainer;
+    opacity: 0;
+    transition: all 0.1s ease-in;
+    padding-top: 10px;
+
+    &_active {
+      opacity: 1;
+      padding: 0;
+    }
+  }
+
+  .postList {
+    grid-area: postList;
+  }
+
+  .pagination {
+    grid-area: pagination;
+    justify-self: center;
+  }
+}
+
+.content {
+  font: $contentFontStyleRegular;
+  color: $dust-color;
+}

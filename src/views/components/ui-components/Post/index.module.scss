@@ -1,0 +1,141 @@
+@import '/src/styles/mixins/index';
+@import '/src/styles/variables';
+
+.article {
+  padding: 24px 12px;
+  max-width: 1192px;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-areas:
+    'usernames icon-buttons'
+    'post-container post-container'
+    'feedback-button checkbox-container';
+
+  gap: 24px;
+  border-radius: 8px;
+  @include addGradientBorder($eerie-color, $main-gradient, 8px, 8px, 1px, -2);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  color: $dust-color;
+  position: relative;
+
+  &_extended {
+    grid-template-areas:
+      'usernames icon-buttons'
+      'post-container post-container'
+      'feedback-button checkbox-container'
+      'feedback-list feedback-list';
+  }
+
+  .usernameContainer,
+  .postContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .usernameContainer {
+    grid-area: usernames;
+  }
+
+  .buttonContainer {
+    grid-area: icon-buttons;
+    justify-content: end;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    .iconButton {
+      width: 24px;
+      max-height: 24px;
+      cursor: pointer;
+
+      &:hover {
+        svg path {
+          stroke: $magenta-color;
+        }
+      }
+
+      .likeButton {
+        width: 24px;
+        height: 22px;
+        &_solid path {
+          fill: $magenta-color;
+          stroke: $magenta-color;
+        }
+      }
+    }
+  }
+
+  .postContainer {
+    grid-area: post-container;
+  }
+
+  .content {
+    &_bold {
+      font-weight: 700;
+    }
+  }
+
+  .feedbackButtonWrapper {
+    max-width: fit-content;
+    border-radius: 8px 8px 0 0;
+    grid-area: feedback-button;
+    transition: padding 0.3s;
+
+    &_active {
+      margin-bottom: -8px;
+      padding: 8px;
+      background-color: $carbon-color;
+    }
+
+    .feedbackButton {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  .checkboxContainer {
+    grid-area: checkbox-container;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .feedbackList {
+    margin-top: -16px;
+    grid-area: feedback-list;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .article {
+    grid-template-areas:
+      'icon-buttons checkbox-container'
+      'usernames .'
+      'post-container post-container'
+      'feedback-button feedback-button'
+      'feedback-list feedback-list';
+
+    .buttonContainer {
+      justify-content: start;
+    }
+
+    .feedbackButtonWrapper {
+      max-width: 100%;
+      position: relative;
+
+      .feedbackButton {
+        max-width: 100%;
+      }
+    }
+
+    .feedbackList {
+      border-top-right-radius: 0;
+    }
+
+    .checkboxContainer {
+      gap: 12px;
+    }
+  }
+}

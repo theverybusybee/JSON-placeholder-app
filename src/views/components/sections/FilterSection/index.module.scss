@@ -1,0 +1,10 @@
+.inputSection {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, auto);
+  gap: 24px;
+  align-items: center;
+
+  .dropdownContainer {
+    position: relative;
+  }
+}

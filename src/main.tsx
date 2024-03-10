@@ -1,24 +1,33 @@
-import React from "react"
-import { createRoot } from "react-dom/client"
-import { Provider } from "react-redux"
-import App from "./App"
-import { store } from "./app/store"
-import "./index.css"
+import { StrictMode } from 'react';
+import App from './views/App';
+import ReactDOM from 'react-dom/client';
+import './styles/index.scss';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from 'app/store';
 
-const container = document.getElementById("root")
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement,
+);
 
-if (container) {
-  const root = createRoot(container)
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<App />}></Route>
+      <Route path="*" element={<div>This route does not exist 404</div>} />
+    </>,
+  ),
+);
 
-  root.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>,
-  )
-} else {
-  throw new Error(
-    "Root element with ID 'root' was not found in the document. Ensure there is a corresponding HTML element with the ID 'root' in your HTML file.",
-  )
-}
+root.render(
+  <StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </StrictMode>,
+);

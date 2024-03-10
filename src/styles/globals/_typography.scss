@@ -1,0 +1,49 @@
+@use '../utils' as *;
+@use '../variables' as *;
+
+h1,
+h2,
+h3,
+p {
+  margin-block: 0;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+
+ul {
+  margin-block: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+button {
+  display: block;
+  padding-inline: 0;
+  font-family: $mainFont;
+  border-width: 0;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:focus {
+    outline-color: $teal-color;
+    outline-width: 1px;
+  }
+}
+
+input {
+  padding: 0;
+
+  &:focus,
+  &:focus-visible {
+    outline-color: $teal-color;
+    outline-width: thin;
+  }
+}
+
+input[type='checkbox'] {
+  margin: 0;
+}

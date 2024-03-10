@@ -1,0 +1,44 @@
+@mixin addGradientBorder(
+  $bgColor,
+  $gradientColor,
+  $innerBorderRadius,
+  $outerBorderRadius,
+  $borderWidth,
+  $z-index
+) {
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+  }
+
+  &::before {
+    top: -$borderWidth;
+    left: -$borderWidth;
+    background: $gradientColor;
+    width: calc(100% + $borderWidth * 2);
+    height: calc(100% + $borderWidth * 2);
+    border-radius: $outerBorderRadius;
+    z-index: $z-index;
+  }
+
+  &::after {
+    min-width: 100%;
+    min-height: 100%;
+    inset: 0;
+    border-radius: $innerBorderRadius;
+    background: $bgColor;
+    z-index: calc($z-index + 1);
+  }
+}
+
+@mixin defineButtonBorderStyle($borderStyle, $bgColor, $gradientColor) {
+  @if $borderStyle == rounded {
+    border-radius: 64px;
+    @include addGradientBorder($bgColor, $gradientColor, 64px, 64px, 1px, -2);
+  } @else {
+    border-radius: 8px;
+    @include addGradientBorder($bgColor, $gradientColor, 8px, 8px, 1px, -2);
+  }
+}

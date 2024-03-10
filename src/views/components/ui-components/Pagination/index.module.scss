@@ -1,0 +1,28 @@
+@import '/src/styles/variables';
+
+.list {
+  display: flex;
+  gap: 8px;
+
+  .item {
+    color: $white-color;
+    font: $contentFontStyleBold;
+
+    &_active,
+    &:hover {
+      background: $icon-gradient;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    .button {
+      color: inherit;
+      font: $contentFontStyleBold;
+    }
+  }
+}
