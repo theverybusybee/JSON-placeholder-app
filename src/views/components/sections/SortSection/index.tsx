@@ -13,15 +13,7 @@ import {
 } from 'slices/postsSlice';
 import { ButtonShape } from 'views/components/ui-components/Button/types';
 import PlusIcon from 'assets/images/icons/plus-icon.svg?react';
-
-const buttonsAmountMockData = [
-  { amount: '10' },
-  { amount: '20' },
-  { amount: '25' },
-  { amount: '50' },
-  { amount: '100' },
-  { amount: 'все' },
-];
+import { buttonsAmountMockData } from 'utils/mock-data';
 
 export const SortSection: React.FC<SortSectionProps> = ({
   allPostsAmount,
@@ -85,4 +77,3 @@ export const SortSection: React.FC<SortSectionProps> = ({
     </section>
   );
 };
-// PlusIcon
