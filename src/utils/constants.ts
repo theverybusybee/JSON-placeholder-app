@@ -16,3 +16,5 @@ export const generateId = (): string => {
 export const handlePostsAmount = (postsNumber: string) => {
   localStorage.setItem('postsAmount', postsNumber);
 };
+
+export const modalRoot = document.querySelector('#react-modals');
