@@ -10,6 +10,7 @@ export const Popup: React.FC<PopupProps> = ({
   children,
   isOpened,
   onClose,
+  title,
 }) => {
   useEffect(() => {
     const handleEscClose = (e: KeyboardEvent) => {
@@ -31,6 +32,7 @@ export const Popup: React.FC<PopupProps> = ({
           <button className={styles.closeButton} onClick={onClose}>
             <CloseIcon />
           </button>
+          <h2 className={styles.title}>{title}</h2>
           {children}
         </article>
       </PopupOverlay>,

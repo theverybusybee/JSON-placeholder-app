@@ -1,11 +1,10 @@
-@import "/src/styles/variables/colors";
+@import "/src/styles/variables/index";
 
 .popup {
-  padding: 100px;
+  padding: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 32px;
   border-radius: 20px;
   position: relative;
@@ -20,7 +19,7 @@
     &:hover {
       svg path {
         fill: $magenta-color;
-            transition: all 0.3s ease;
+        transition: all 0.3s ease;
       }
     }
 
@@ -30,5 +29,10 @@
     svg path {
       fill: $dust-color;
     }
+  }
+
+  .title {
+    font: $popupTitleFontStyle;
+    color: $white-color;
   }
 }
