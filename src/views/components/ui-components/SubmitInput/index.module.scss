@@ -21,7 +21,6 @@
       width: 100%;
       background-color: transparent;
       color: $dust-color;
-      caret-color: $magenta-color;
 
       &:focus {
         outline-width: 0;
@@ -47,6 +46,7 @@
       border-color: $magenta-color;
 
       svg path {
+        transition: all 0.3s ease;
         fill: $magenta-color;
       }
     }
