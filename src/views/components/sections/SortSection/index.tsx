@@ -17,6 +17,7 @@ import { buttonsAmountMockData } from 'utils/mock-data';
 
 export const SortSection: React.FC<SortSectionProps> = ({
   allPostsAmount,
+  onAddPost,
   extraClass,
 }) => {
   const dispatch = useAppDispatch();
@@ -73,6 +74,7 @@ export const SortSection: React.FC<SortSectionProps> = ({
         content="Add new post"
         shape={ButtonShape.RoundedSquare}
         Icon={PlusIcon}
+        onClick={onAddPost}
       />
     </section>
   );
