@@ -7,7 +7,9 @@ export interface ButtonProps {
   borderStyle?: ButtonBorderStyle;
   hasArrow?: boolean;
   isActive?: boolean;
+  isDisabled?: boolean;
   Icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  type?: 'button' | 'submit';
   extraClass?: string;
 }
 

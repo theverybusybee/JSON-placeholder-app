@@ -12,6 +12,8 @@ export const Button: React.FC<ButtonProps> = ({
   borderStyle,
   hasArrow = false,
   isActive = false,
+  isDisabled = false,
+  type = 'button',
   Icon,
   extraClass,
 }) => {
@@ -31,6 +33,8 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
+      type={type}
+      disabled={isDisabled}
     >
       {content}
       {Icon && <Icon className={styles.icon} />}
