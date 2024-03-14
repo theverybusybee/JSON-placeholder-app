@@ -58,19 +58,21 @@ export const Post: React.FC<PostProps> = ({
         <p className={styles.content}>{content}</p>
       </div>
 
-      <div className={feedbackButtonWrapperClass}>
-        <Button
-          extraClass={`${styles.feedbackButton}`}
-          content="show comments"
-          shape={ButtonShape.RoundedSquare}
-          borderStyle={ButtonBorderStyle.Gradient}
-          onClick={() => {
-            setIsFeedbackOpened(!isFeedbackOpened);
-          }}
-          hasArrow={true}
-          isActive={isFeedbackOpened}
-        />
-      </div>
+      {comments.length !== 0 && (
+        <div className={feedbackButtonWrapperClass}>
+          <Button
+            extraClass={`${styles.feedbackButton}`}
+            content="show comments"
+            shape={ButtonShape.RoundedSquare}
+            borderStyle={ButtonBorderStyle.Gradient}
+            onClick={() => {
+              setIsFeedbackOpened(!isFeedbackOpened);
+            }}
+            hasArrow={true}
+            isActive={isFeedbackOpened}
+          />
+        </div>
+      )}
 
       <div className={styles.checkboxContainer}>
         <p>Highlight post:</p>
