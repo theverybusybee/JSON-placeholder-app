@@ -18,3 +18,9 @@ export const handlePostsAmount = (postsNumber: string) => {
 };
 
 export const modalRoot = document.querySelector('#react-modals');
+
+export const errorType = {
+  valueMissing: {
+    default: 'This field is required',
+  },
+};
