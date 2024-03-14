@@ -1,4 +1,4 @@
-@import "/src/styles/variables/index";
+@import '/src/styles/variables/index';
 
 .popup {
   padding: 80px;
@@ -14,6 +14,7 @@
   z-index: 10;
   background-color: transparentize($carbon-color, 0.5);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   .closeButton {
     &:hover {
