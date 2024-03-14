@@ -69,3 +69,8 @@ export interface PostsSliceState {
   filter: Filter;
   filteredPosts: Post[];
 }
+
+export interface PostBody {
+  title: string;
+  content: string;
+}

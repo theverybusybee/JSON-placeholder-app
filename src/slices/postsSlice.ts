@@ -1,6 +1,12 @@
 import { type PayloadAction } from '@reduxjs/toolkit';
 import { createAppSlice } from 'app/createAppSlice';
-import { deletePost, getComments, getPosts, getUsers } from 'utils/fetches';
+import {
+  deletePost,
+  getComments,
+  getPosts,
+  getUsers,
+  postPost,
+} from 'utils/fetches';
 import {
   type Post,
   type PostsSliceState,
@@ -8,6 +14,7 @@ import {
   type Comment,
   Direction,
   Status,
+  type PostBody,
 } from './postsTypes';
 
 const initialState: PostsSliceState = {
@@ -109,6 +116,38 @@ export const postsSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.status = Status.Idle;
           state.users = action.payload;
+        },
+        rejected: (state) => {
+          state.status = Status.Failed;
+        },
+      },
+    ),
+
+    postPostAsync: create.asyncThunk(
+      async (postBody: PostBody) => {
+        const response: Post = await postPost(postBody);
+        return response;
+      },
+      {
+        pending: (state) => {
+          state.status = Status.Loading;
+        },
+        fulfilled: (state, action) => {
+          state.status = Status.Idle;
+
+          const returnedPost = action.payload;
+
+          const postId = state.posts.some((post) => post.id === returnedPost.id)
+            ? returnedPost.id + 1
+            : returnedPost.id;
+
+          const newPost = {
+            ...returnedPost,
+            id: postId,
+            isFavorite: false,
+            isChecked: false,
+          };
+          state.posts = [newPost].concat(state.posts);
         },
         rejected: (state) => {
           state.status = Status.Failed;
@@ -241,6 +280,7 @@ export const {
   getUsersAsync,
   getCommentsAsync,
   deletePostAsync,
+  postPostAsync,
   toggleFavorites,
   toggleIsChecked,
   setFilterSearchRequest,
