@@ -5,31 +5,36 @@ import { createPortal } from 'react-dom';
 import { modalRoot } from 'utils/constants';
 import CloseIcon from 'assets/images/icons/close-icon.svg?react';
 import { PopupOverlay } from '../PopupOverlay';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { selectIsModalOpened, toggleIsOpened } from 'slices/modalsSlice';
 
-export const Popup: React.FC<PopupProps> = ({
-  children,
-  isOpened,
-  onClose,
-  title,
-}) => {
+export const Popup: React.FC<PopupProps> = ({ children, title }) => {
+  const dispatch = useAppDispatch();
+  const isModalOpened = useAppSelector(selectIsModalOpened);
   useEffect(() => {
     const handleEscClose = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        dispatch(toggleIsOpened());
       }
     };
     document.addEventListener('keydown', handleEscClose);
     return () => {
       document.removeEventListener('keydown', handleEscClose);
     };
-  }, [isOpened, onClose]);
+  }, [isModalOpened, dispatch]);
 
   return (
     modalRoot &&
     createPortal(
-      <PopupOverlay onClose={onClose} isOpened={isOpened}>
+      <PopupOverlay
+        onClose={() => dispatch(toggleIsOpened())}
+        isOpened={isModalOpened}
+      >
         <article className={styles.popup}>
-          <button className={styles.closeButton} onClick={onClose}>
+          <button
+            className={styles.closeButton}
+            onClick={() => dispatch(toggleIsOpened())}
+          >
             <CloseIcon />
           </button>
           <h2 className={styles.title}>{title}</h2>

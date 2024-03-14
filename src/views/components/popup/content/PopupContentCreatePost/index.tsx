@@ -4,6 +4,7 @@ import { Button } from 'views/components/ui-components/Button';
 import { useState } from 'react';
 import { useAppDispatch } from 'app/hooks';
 import { postPostAsync } from 'slices/postsSlice';
+import { toggleIsOpened } from 'slices/modalsSlice';
 
 export const PopupContentCreatePost: React.FC<
   PopupContentCreatePostProp
@@ -38,6 +39,12 @@ export const PopupContentCreatePost: React.FC<
         content: formState.content.trim(),
       }),
     );
+    dispatch(toggleIsOpened());
+    setFormState({
+      ...formState,
+      title: '',
+      content: '',
+    });
   };
 
   return (
