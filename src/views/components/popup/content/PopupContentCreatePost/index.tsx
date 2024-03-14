@@ -2,10 +2,13 @@ import type { FormState, PopupContentCreatePostProp } from './types';
 import styles from './index.module.scss';
 import { Button } from 'views/components/ui-components/Button';
 import { useState } from 'react';
+import { useAppDispatch } from 'app/hooks';
+import { postPostAsync } from 'slices/postsSlice';
 
 export const PopupContentCreatePost: React.FC<
   PopupContentCreatePostProp
 > = () => {
+  const dispatch = useAppDispatch();
   const [formState, setFormState] = useState<FormState>({
     title: '',
     content: '',
@@ -27,10 +30,18 @@ export const PopupContentCreatePost: React.FC<
     });
   };
 
-  console.log(formState);
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    dispatch(
+      postPostAsync({
+        title: formState.title.trim(),
+        content: formState.content.trim(),
+      }),
+    );
+  };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.inputContainer}>
         <h3 className={styles.inputTitle}>Title</h3>
         <label className={styles.label} htmlFor="">

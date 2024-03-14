@@ -10,11 +10,11 @@ import {
   selectPosts,
   toggleFavorites,
   toggleIsChecked,
-} from 'slices/postsSlice/postsSlice';
+} from 'slices/postsSlice';
 import { useMemo, useState } from 'react';
 import { Pagination } from 'views/components/ui-components/Pagination';
 import { Button } from 'views/components/ui-components/Button';
-import type { Post } from 'slices/postsSlice/postsTypes';
+import type { Post } from 'slices/postsSlice/types';
 
 export const PostsSection: React.FC<PostsSectionProps> = ({
   postsAmount,

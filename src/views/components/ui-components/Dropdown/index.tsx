@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 import type { DropdownProps } from './types';
 import { useAppDispatch } from 'app/hooks';
-import { filter, setFilterUsername } from 'slices/postsSlice/postsSlice';
+import { filter, setFilterUsername } from 'slices/postsSlice';
 
 export const Dropdown: React.FC<DropdownProps> = ({ extraClass, users }) => {
   const dispatch = useAppDispatch();

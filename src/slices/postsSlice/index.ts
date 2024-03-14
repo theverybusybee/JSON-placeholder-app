@@ -15,7 +15,7 @@ import {
   Direction,
   Status,
   type PostBody,
-} from './postsTypes';
+} from './types';
 
 const initialState: PostsSliceState = {
   posts: [],

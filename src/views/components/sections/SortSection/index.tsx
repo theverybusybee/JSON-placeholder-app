@@ -3,14 +3,14 @@ import type { SortSectionProps } from './types';
 import { Button } from 'views/components/ui-components/Button';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Direction } from 'slices/postsSlice/postsTypes';
+import { Direction } from 'slices/postsSlice/types';
 import {
   filter,
   selectFilter,
   selectPostsAmount,
   setFilterDirection,
   setFilterPostsAmount,
-} from 'slices/postsSlice/postsSlice';
+} from 'slices/postsSlice';
 import { ButtonShape } from 'views/components/ui-components/Button/types';
 import PlusIcon from 'assets/images/icons/plus-icon.svg?react';
 import { buttonsAmountMockData } from 'utils/mock-data';
