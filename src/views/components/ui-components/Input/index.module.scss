@@ -1,0 +1,33 @@
+@import '/src/styles/variables';
+
+.label {
+  position: relative;
+  input.input,
+  textarea.input {
+    min-width: 100%;
+    padding: 12px;
+    background: $eerie-color;
+    border-radius: 12px;
+    color: $white-color;
+    font: inherit;
+
+    &::placeholder {
+      color: $carbon-color;
+    }
+
+    &:invalid {
+      color: #ee3465;
+    }
+
+    + .input__error {
+      position: absolute;
+      left: 0;
+      bottom: -18px;
+      font: $inputErrorFontStyle;
+      color: $magenta-color;
+    }
+  }
+  textarea.input {
+    height: 124px;
+  }
+}
