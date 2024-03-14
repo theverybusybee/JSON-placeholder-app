@@ -1,4 +1,4 @@
-import type { Direction } from 'slices/postsTypes';
+import type { Direction } from 'slices/postsSlice/postsTypes';
 
 export interface SortSectionProps {
   allPostsAmount: string;

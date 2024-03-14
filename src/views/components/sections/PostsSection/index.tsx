@@ -10,11 +10,11 @@ import {
   selectPosts,
   toggleFavorites,
   toggleIsChecked,
-} from 'slices/postsSlice';
+} from 'slices/postsSlice/postsSlice';
 import { useMemo, useState } from 'react';
 import { Pagination } from 'views/components/ui-components/Pagination';
 import { Button } from 'views/components/ui-components/Button';
-import type { Post } from 'slices/postsTypes';
+import type { Post } from 'slices/postsSlice/postsTypes';
 
 export const PostsSection: React.FC<PostsSectionProps> = ({
   postsAmount,
@@ -35,7 +35,7 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       : [...posts].slice(startIndex, endIndex);
 
     return filteredArray;
-  }, [posts, filteredPosts, postsAmount, currentPageState]);
+  }, [posts, filteredPosts, postsAmount, currentPageState, isFilterActive]);
 
   const handleChangePage = (pageNumber: number) => {
     setCurrentPageState(pageNumber);

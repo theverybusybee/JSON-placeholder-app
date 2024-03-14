@@ -9,7 +9,7 @@ import {
   selectUsers,
   toggleFavorites,
   toggleIsChecked,
-} from 'slices/postsSlice';
+} from 'slices/postsSlice/postsSlice';
 import clsx from 'clsx';
 import { useCallback } from 'react';
 

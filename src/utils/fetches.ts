@@ -1,4 +1,4 @@
-import { type PostBody } from 'slices/postsTypes';
+import { type PostBody } from 'slices/postsSlice/postsTypes';
 import { baseUrl, checkResponse } from './constants';
 
 type TRequestOptions = {

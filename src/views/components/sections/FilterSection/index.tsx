@@ -13,7 +13,7 @@ import {
   setFilterSearchRequest,
   skipFilter,
   toggleFilterIsFavorites,
-} from 'slices/postsSlice';
+} from 'slices/postsSlice/postsSlice';
 
 export const FilterSection: React.FC<FilterSectionProps> = ({ extraClass }) => {
   const dispatch = useAppDispatch();
