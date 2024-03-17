@@ -19,4 +19,10 @@ export default defineConfig({
     setupFiles: 'src/setupTests',
     mockReset: true,
   },
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+      generateScopedName: '[folder]__[local]___[hash:base64:5]',
+    },
+  },
 });
