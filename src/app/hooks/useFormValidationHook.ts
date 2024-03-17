@@ -39,14 +39,11 @@ export default function useFormValidatorHook() {
     }
   };
 
-  const resetForm = useCallback(
-    (newInputValues = {}, newErrors = {}, newIsValid = false) => {
-      setInputValues(newInputValues);
-      setInputErrors(newErrors);
-      setIsFormValid(newIsValid);
-    },
-    [setInputValues, setInputErrors, setIsFormValid],
-  );
+  const resetForm = useCallback(() => {
+    setInputValues({});
+    setInputErrors({});
+    setIsFormValid(false);
+  }, [setInputValues, setInputErrors, setIsFormValid]);
 
   return {
     inputValues,
