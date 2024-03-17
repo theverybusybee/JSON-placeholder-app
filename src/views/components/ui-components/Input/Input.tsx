@@ -21,7 +21,8 @@ export function Input({
         type={type}
         required={isRequired}
         name={name}
-        defaultValue={value}
+        value={value}
+        defaultValue={''}
         onChange={onChange}
         minLength={minLength}
         maxLength={maxLength}
