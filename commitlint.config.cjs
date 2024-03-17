@@ -8,7 +8,7 @@ module.exports = {
     'footer-leading-blank': [2, 'always'],
 
     // Максимальная длина заголовка 72 символа
-    'header-max-length': [2, 'always', 72],
+    'header-max-length': [2, 'always', 100],
 
     // Область всегда только в нижнем регистре
     'scope-case': [2, 'always', 'lower-case'],
