@@ -2,6 +2,11 @@
 
 .label {
   position: relative;
+
+  &:has(textarea.input) {
+    max-height: 124px;
+  }
+
   input.input,
   textarea.input {
     min-width: 100%;
@@ -16,13 +21,16 @@
     }
 
     &:invalid {
-      color: #ee3465;
+      color: $magenta-color;
     }
 
     + .input__error {
       position: absolute;
       left: 0;
-      bottom: -18px;
+      left: 0;
+      bottom: 0;
+      transform: translate(0, calc(100% + 4px));
+      height: min-content;
       font: $inputErrorFontStyle;
       color: $magenta-color;
     }

@@ -185,7 +185,6 @@ export const postsSlice = createAppSlice({
 
     setFilterDirection: create.reducer<Direction>(
       (state, action: PayloadAction<Direction>) => {
-        if (!state.filter.isActive) state.filter.isActive = true;
         state.filter.params.direction = action.payload;
       },
     ),
