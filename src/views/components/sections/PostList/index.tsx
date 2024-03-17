@@ -37,7 +37,6 @@ export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
   const handleCheck = useCallback(
     (postId: number) => {
       dispatch(toggleIsChecked(postId));
-      dispatch(filter());
     },
     [dispatch],
   );

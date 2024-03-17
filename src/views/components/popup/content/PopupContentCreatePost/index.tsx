@@ -7,7 +7,6 @@ import { postPostAsync } from 'slices/postsSlice';
 import { toggleIsOpened } from 'slices/modalsSlice';
 import { Input } from 'views/components/ui-components/Input/Input';
 import useFormValidatorHook from 'app/hooks/useFormValidationHook';
-import { useEffect } from 'react';
 
 export const PopupContentCreatePost: React.FC<
   PopupContentCreatePostProp
@@ -21,10 +20,6 @@ export const PopupContentCreatePost: React.FC<
     isFormValid,
     resetForm,
   } = useFormValidatorHook();
-
-  useEffect(() => {
-    resetForm();
-  }, []);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();

@@ -27,14 +27,12 @@ export default function useFormValidatorHook() {
 
     switch (name) {
       case 'postTitle':
-        {
-          if (target.validity.valueMissing) {
-            setErrorMessage(name, errorType.valueMissing.default);
-          }
-          // if (target.validity.typeMismatch) {
-          //   setErrorMessage(name, errorType.typeMismatch.name);
-          // }
+        if (target.validity.valueMissing) {
+          setErrorMessage(name, errorType.valueMissing.default);
         }
+        // if (target.validity.typeMismatch) {
+        //   setErrorMessage(name, errorType.typeMismatch.name);
+        // }
         break;
     }
   };
