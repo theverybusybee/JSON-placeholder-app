@@ -1,30 +1,47 @@
 import { createAppSlice } from 'app/createAppSlice';
-import { type ModalsSliceState } from './types';
+import { type ModalType, type ModalsSliceState } from './types';
+import { type PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: ModalsSliceState = {
   isOpened: false,
+  modalType: '',
 };
 
 export const modalsSlice = createAppSlice({
   name: 'modals',
   initialState,
   reducers: (create) => ({
-    toggleIsOpened: create.reducer((state) => {
+    setIsModalOpenedTrue: create.reducer(
+      (state, action: PayloadAction<ModalType>) => {
+        if (typeof window != 'undefined' && window.document) {
+          document.body.style.overflow = 'hidden';
+        }
+        return {
+          ...state,
+          isOpened: true,
+          modalType: action.payload,
+        };
+      },
+    ),
+    setIsModalOpenedFalse: create.reducer((state) => {
       if (typeof window != 'undefined' && window.document) {
-        document.body.style.overflow = state.isOpened ? 'unset' : 'hidden';
+        document.body.style.overflow = 'unset';
       }
       return {
         ...state,
-        isOpened: !state.isOpened,
+        isOpened: false,
+        modalType: '',
       };
     }),
   }),
 
   selectors: {
     selectIsModalOpened: (modal) => modal.isOpened,
+    selectModalType: (modal) => modal.modalType,
   },
 });
 
-export const { toggleIsOpened } = modalsSlice.actions;
+export const { setIsModalOpenedTrue, setIsModalOpenedFalse } =
+  modalsSlice.actions;
 
-export const { selectIsModalOpened } = modalsSlice.selectors;
+export const { selectIsModalOpened, selectModalType } = modalsSlice.selectors;
