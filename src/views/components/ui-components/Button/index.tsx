@@ -5,17 +5,13 @@ import ArrowDown from 'assets/images/icons/arrow-down.svg?react';
 
 export const Button: React.FC<ButtonProps> = ({
   content,
-  onClick,
-  onMouseOver,
-  onMouseOut,
   shape = ButtonShape.Rounded,
   borderStyle,
   hasArrow = false,
   isActive = false,
-  isDisabled = false,
-  type = 'button',
   Icon,
   extraClass,
+  ...props
 }) => {
   const buttonClass = clsx(
     styles.button,
@@ -28,14 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
   );
 
   return (
-    <button
-      className={buttonClass}
-      onClick={onClick}
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
-      type={type}
-      disabled={isDisabled}
-    >
+    <button className={buttonClass} {...props}>
       {content}
       {Icon && <Icon className={styles.icon} />}
       {hasArrow && <ArrowDown className={styles.arrow} />}

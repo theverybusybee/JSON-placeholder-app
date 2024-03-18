@@ -1,25 +1,46 @@
 import type { PopupContentCreatePostProp } from './types';
 import styles from './index.module.scss';
 import { Button } from 'views/components/ui-components/Button';
-
-import { useAppDispatch } from 'app/hooks';
-import { postPostAsync } from 'slices/postsSlice';
-import { toggleIsOpened } from 'slices/modalsSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import {
+  postPostAsync,
+  selectClickedPostId,
+  selectPosts,
+} from 'slices/postsSlice';
 import { Input } from 'views/components/ui-components/Input/Input';
 import useFormValidatorHook from 'app/hooks/useFormValidationHook';
+import { selectModalType, setIsModalOpenedFalse } from 'slices/modalsSlice';
+import { ModalType } from 'slices/modalsSlice/types';
+import { useEffect } from 'react';
 
 export const PopupContentCreatePost: React.FC<
   PopupContentCreatePostProp
 > = () => {
   const dispatch = useAppDispatch();
-
+  const modalType = useAppSelector(selectModalType);
+  const posts = useAppSelector(selectPosts);
+  const clickedPostId = useAppSelector(selectClickedPostId);
   const {
     inputValues,
     handleInputChange,
+    setInputValues,
     inputErrors,
     isFormValid,
     resetForm,
   } = useFormValidatorHook();
+
+  useEffect(() => {
+    if (modalType === ModalType.EditPost) {
+      const post = posts.find((post) => post.id === clickedPostId);
+      if (post) {
+        setInputValues({
+          ...inputValues,
+          postTitle: post.title,
+          postContent: post.body,
+        });
+      }
+    }
+  }, [modalType]);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -29,7 +50,7 @@ export const PopupContentCreatePost: React.FC<
         content: inputValues.postContent.trim(),
       }),
     );
-    dispatch(toggleIsOpened());
+    dispatch(setIsModalOpenedFalse());
     resetForm();
   };
 
@@ -64,7 +85,7 @@ export const PopupContentCreatePost: React.FC<
         />
       </div>
       <Button
-        isDisabled={!isFormValid}
+        disabled={!isFormValid}
         extraClass={styles.submitButton}
         type="submit"
         content="Submit"

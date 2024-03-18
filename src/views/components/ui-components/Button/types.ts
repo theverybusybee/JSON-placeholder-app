@@ -1,15 +1,13 @@
-export interface ButtonProps {
+import { type ButtonHTMLAttributes } from 'react';
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   content: string;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onMouseOver?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onMouseOut?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   shape?: ButtonShape;
   borderStyle?: ButtonBorderStyle;
   hasArrow?: boolean;
   isActive?: boolean;
-  isDisabled?: boolean;
+  // isDisabled?: boolean;
   Icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-  type?: 'button' | 'submit';
   extraClass?: string;
 }
 
