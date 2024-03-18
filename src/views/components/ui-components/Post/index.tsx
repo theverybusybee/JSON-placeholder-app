@@ -27,6 +27,7 @@ export const Post: React.FC<PostProps> = ({
   const articleClass = clsx(styles.article, {
     [styles.article_extended]: isFeedbackOpened,
   });
+  const contentClass = clsx(styles.content, styles.content_bold);
   const feedbackButtonWrapperClass = clsx(styles.feedbackButtonWrapper, {
     [styles.feedbackButtonWrapper_active]: isFeedbackOpened,
   });
@@ -34,7 +35,7 @@ export const Post: React.FC<PostProps> = ({
   return (
     <article className={articleClass}>
       <div className={styles.usernameContainer}>
-        <p className={`${styles.content} ${styles.content_bold}`}>{user}</p>
+        <p className={contentClass}>{user}</p>
         <p className={styles.content}>@{username}</p>
       </div>
       <div className={styles.buttonContainer}>
@@ -54,7 +55,7 @@ export const Post: React.FC<PostProps> = ({
       </div>
 
       <div className={styles.postContainer}>
-        <p className={`${styles.content} ${styles.content_bold}`}>{title}</p>
+        <p className={contentClass}>{title}</p>
         <p className={styles.content}>{content}</p>
       </div>
 
