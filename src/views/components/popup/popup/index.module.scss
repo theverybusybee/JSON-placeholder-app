@@ -1,4 +1,4 @@
-@import '/src/styles/variables/index';
+@import "/src/styles/variables/index";
 
 .popup {
   padding: 80px;
@@ -35,5 +35,10 @@
   .title {
     font: $popupTitleFontStyle;
     color: $white-color;
+    text-align: center;
+
+    &_position__left {
+      text-align: left;
+    }
   }
 }
