@@ -68,6 +68,7 @@ export interface PostsSliceState {
   postsAmount: string;
   filter: Filter;
   filteredPosts: Post[];
+  clickedPostId: number;
 }
 
 export interface PostBody {

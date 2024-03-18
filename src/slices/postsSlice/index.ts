@@ -38,6 +38,7 @@ const initialState: PostsSliceState = {
     },
   },
   filteredPosts: [],
+  clickedPostId: -1,
 };
 
 export const postsSlice = createAppSlice({
@@ -261,6 +262,14 @@ export const postsSlice = createAppSlice({
       };
       state.filteredPosts = [];
     }),
+
+    setClickedPostId: create.reducer((state, action: PayloadAction<number>) => {
+      state.clickedPostId = action.payload;
+    }),
+
+    resetClickedPostId: create.reducer((state) => {
+      state.clickedPostId = -1;
+    }),
   }),
 
   selectors: {
@@ -271,6 +280,7 @@ export const postsSlice = createAppSlice({
     selectFilter: (posts) => posts.filter,
     selectFilteredPosts: (posts) => posts.filteredPosts,
     selectPostsAmount: (posts) => posts.postsAmount,
+    selectClickedPostId: (posts) => posts.clickedPostId,
   },
 });
 
@@ -289,6 +299,8 @@ export const {
   toggleFilterIsFavorites,
   filter,
   skipFilter,
+  setClickedPostId,
+  resetClickedPostId,
 } = postsSlice.actions;
 
 export const {
@@ -299,4 +311,5 @@ export const {
   selectFilter,
   selectFilteredPosts,
   selectPostsAmount,
+  selectClickedPostId,
 } = postsSlice.selectors;
