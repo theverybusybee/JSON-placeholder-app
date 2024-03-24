@@ -184,7 +184,6 @@ export const postsSlice = createAppSlice({
 
     setFilterSearchRequest: create.reducer<string>(
       (state, action: PayloadAction<string>) => {
-        if (!state.filter.isActive) state.filter.isActive = true;
         state.filter.params.searchRequest = action.payload;
       },
     ),
@@ -236,10 +235,10 @@ export const postsSlice = createAppSlice({
       }
 
       if (searchRequest) {
+        if (!state.filter.isActive) state.filter.isActive = true;
         const searchRequestExp = new RegExp(searchRequest, 'g');
-
         state.filteredPosts = state.filteredPosts.filter((post) =>
-          searchRequestExp.test(post.title),
+          searchRequestExp.test(post.title.toLocaleLowerCase()),
         );
       }
 
