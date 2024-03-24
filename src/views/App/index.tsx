@@ -11,10 +11,11 @@ import {
 import { FilterSection } from 'views/components/sections/FilterSection';
 import { PostsSection } from 'views/components/sections/PostsSection';
 import { SortSection } from 'views/components/sections/SortSection';
-import { handlePostsAmount } from 'utils/helpers';
+import { setLocalStorageItem } from 'utils/helpers';
 import { selectIsModalOpened, setIsModalOpenedTrue } from 'slices/modalsSlice';
 import { ModalType } from 'slices/modalsSlice/types';
 import { PopupHandler } from 'views/components/popup/PopupHandler';
+import { PostsAmount } from 'slices/postsSlice/types';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -29,13 +30,16 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    handlePostsAmount(postsAmount);
+    setLocalStorageItem(
+      'postsAmount',
+      postsAmount === posts.length.toString() ? PostsAmount.All : postsAmount,
+    );
   }, [postsAmount]);
 
   return (
     <main className={styles.main}>
       <FilterSection
-        value="kkfdf"
+        value=""
         onFavoritesFilter={() => {}}
         onUsernameFilter={() => {}}
       />

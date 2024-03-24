@@ -19,7 +19,12 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />}></Route>
-      <Route path="*" element={<div>This route does not exist 404</div>} />
+      <Route
+        path="*"
+        element={
+          <div style={{ color: '#fff' }}>This route does not exist 404</div>
+        }
+      />
     </>,
   ),
 );

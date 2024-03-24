@@ -60,6 +60,15 @@ export interface Filter {
   };
 }
 
+export enum PostsAmount {
+  Ten = '10',
+  Twenty = '20',
+  TwentyFive = '25',
+  Fifty = '50',
+  OneHundred = '100',
+  All = 'all',
+}
+
 export interface PostsSliceState {
   posts: Post[];
   users: User[];

@@ -16,18 +16,13 @@ import {
   Status,
   type PostBody,
 } from './types';
-
+import { setPostsAmount } from 'utils/helpers';
 const initialState: PostsSliceState = {
   posts: [],
   users: [],
   comments: [],
   status: Status.Idle,
-  postsAmount:
-    !localStorage.getItem('postsAmount') === null ||
-    localStorage.getItem('postsAmount') === 'undefined' ||
-    localStorage.getItem('postsAmount') === 'null'
-      ? '10'
-      : localStorage.getItem('postsAmount')!,
+  postsAmount: setPostsAmount(localStorage.getItem('postsAmount')),
   filter: {
     isActive: false,
     params: {
