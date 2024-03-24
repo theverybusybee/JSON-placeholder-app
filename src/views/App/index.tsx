@@ -11,7 +11,7 @@ import {
 import { FilterSection } from 'views/components/sections/FilterSection';
 import { PostsSection } from 'views/components/sections/PostsSection';
 import { SortSection } from 'views/components/sections/SortSection';
-import { handlePostsAmount } from 'utils/constants';
+import { handlePostsAmount } from 'utils/helpers';
 import { selectIsModalOpened, setIsModalOpenedTrue } from 'slices/modalsSlice';
 import { ModalType } from 'slices/modalsSlice/types';
 import { PopupHandler } from 'views/components/popup/PopupHandler';

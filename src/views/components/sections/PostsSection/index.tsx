@@ -15,6 +15,7 @@ import { useMemo, useState } from 'react';
 import { Pagination } from 'views/components/ui-components/Pagination';
 import { Button } from 'views/components/ui-components/Button';
 import type { Post } from 'slices/postsSlice/types';
+import { getPagesAmount } from 'utils/helpers';
 
 export const PostsSection: React.FC<PostsSectionProps> = ({
   postsAmount,
@@ -66,13 +67,9 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
     }
   };
 
-  const getPagesAmount = () => {
-    const countPages = isFilterActive
-      ? filteredPosts.length / +postsAmount
-      : posts.length / +postsAmount;
-
-    return countPages < 1 ? 0 : Math.ceil(countPages);
-  };
+  const pagesAmount = useMemo(() => {
+    return getPagesAmount(isFilterActive, posts, filteredPosts, postsAmount);
+  }, [isFilterActive, posts, filteredPosts, postsAmount]);
 
   const isPostsHighlighted = posts.some((post) => post.isChecked);
 
@@ -104,12 +101,12 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       ) : (
         <p className={styles.content}>Ничего не найдено</p>
       )}
-      {getPagesAmount() && (
+      {pagesAmount && (
         <Pagination
           extraClass={styles.pagination}
           onClick={handleChangePage}
           currentPageState={currentPageState}
-          pagesAmount={getPagesAmount()}
+          pagesAmount={pagesAmount}
         />
       )}
     </section>

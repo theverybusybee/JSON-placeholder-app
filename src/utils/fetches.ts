@@ -1,5 +1,6 @@
 import { type PostBody } from 'slices/postsSlice/types';
-import { baseUrl, checkResponse } from './constants';
+import { baseUrl } from './constants';
+import { checkResponse } from './helpers';
 
 type TRequestOptions = {
   method: 'POST' | 'GET' | 'PATCH' | 'DELETE';
