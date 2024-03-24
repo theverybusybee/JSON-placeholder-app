@@ -8,7 +8,7 @@ import EditIcon from 'assets/images/icons/edit-icon.svg?react';
 import HeartIcon from 'assets/images/icons/heart-icon.svg?react';
 import HeartIconSolid from 'assets/images/icons/heart-icon-solid.svg?react';
 import { ButtonBorderStyle, ButtonShape } from '../Button/types';
-import { FeedbackList } from 'views/components/sections/FeedbackList';
+import { FeedbackList } from 'views/components/sections/FeedBackList';
 import clsx from 'clsx';
 
 export const Post: React.FC<PostProps> = ({
