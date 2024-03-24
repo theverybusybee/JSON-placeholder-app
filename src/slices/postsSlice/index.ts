@@ -32,7 +32,7 @@ const initialState: PostsSliceState = {
     isActive: false,
     params: {
       searchRequest: '',
-      direction: Direction.Ascending,
+      direction: Direction.Descending,
       username: '',
       isFavorites: false,
     },
@@ -76,9 +76,11 @@ export const postsSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.status = Status.Idle;
-          state.posts = action.payload.map((post) => {
-            return { ...post, isFavorite: false, isChecked: false };
-          });
+          state.posts = action.payload
+            .map((post) => {
+              return { ...post, isFavorite: false, isChecked: false };
+            })
+            .reverse();
         },
         rejected: (state) => {
           state.status = Status.Failed;
@@ -176,6 +178,14 @@ export const postsSlice = createAppSlice({
         },
       },
     ),
+
+    updatePostById: create.reducer((state, action: PayloadAction<Post>) => {
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id,
+      );
+      if (index !== -1) state.posts[index].title = action.payload.title;
+      state.posts[index].body = action.payload.body;
+    }),
 
     setFilterSearchRequest: create.reducer<string>(
       (state, action: PayloadAction<string>) => {
@@ -301,6 +311,7 @@ export const {
   skipFilter,
   setClickedPostId,
   resetClickedPostId,
+  updatePostById,
 } = postsSlice.actions;
 
 export const {

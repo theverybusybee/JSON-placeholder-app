@@ -40,14 +40,14 @@ export const SortSection: React.FC<SortSectionProps> = ({
       <article className={styles.buttonsContainer}>
         <p>direction:</p>
         <Button
-          isActive={filterParams.direction === Direction.Ascending}
-          content="ascending"
-          onClick={() => handleSortAscending()}
-        />
-        <Button
           isActive={filterParams.direction === Direction.Descending}
           content="descending"
           onClick={() => handleSortDescending()}
+        />
+        <Button
+          isActive={filterParams.direction === Direction.Ascending}
+          content="ascending"
+          onClick={() => handleSortAscending()}
         />
       </article>
       <article className={styles.buttonsContainer}>
