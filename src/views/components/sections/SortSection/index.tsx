@@ -3,7 +3,7 @@ import type { SortSectionProps } from './types';
 import { Button } from 'views/components/ui-components/Button';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Direction } from 'slices/postsTypes';
+import { Direction } from 'slices/postsSlice/types';
 import {
   filter,
   selectFilter,
@@ -13,18 +13,11 @@ import {
 } from 'slices/postsSlice';
 import { ButtonShape } from 'views/components/ui-components/Button/types';
 import PlusIcon from 'assets/images/icons/plus-icon.svg?react';
-
-const buttonsAmountMockData = [
-  { amount: '10' },
-  { amount: '20' },
-  { amount: '25' },
-  { amount: '50' },
-  { amount: '100' },
-  { amount: 'все' },
-];
+import { buttonsAmountMockData } from 'utils/mock-data';
 
 export const SortSection: React.FC<SortSectionProps> = ({
   allPostsAmount,
+  onAddPost,
   extraClass,
 }) => {
   const dispatch = useAppDispatch();
@@ -47,14 +40,14 @@ export const SortSection: React.FC<SortSectionProps> = ({
       <article className={styles.buttonsContainer}>
         <p>direction:</p>
         <Button
-          isActive={filterParams.direction === Direction.Ascending}
-          content="ascending"
-          onClick={() => handleSortAscending()}
-        />
-        <Button
           isActive={filterParams.direction === Direction.Descending}
           content="descending"
           onClick={() => handleSortDescending()}
+        />
+        <Button
+          isActive={filterParams.direction === Direction.Ascending}
+          content="ascending"
+          onClick={() => handleSortAscending()}
         />
       </article>
       <article className={styles.buttonsContainer}>
@@ -81,8 +74,8 @@ export const SortSection: React.FC<SortSectionProps> = ({
         content="Add new post"
         shape={ButtonShape.RoundedSquare}
         Icon={PlusIcon}
+        onClick={onAddPost}
       />
     </section>
   );
 };
-// PlusIcon

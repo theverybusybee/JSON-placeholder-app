@@ -1,6 +1,12 @@
 import { type PayloadAction } from '@reduxjs/toolkit';
 import { createAppSlice } from 'app/createAppSlice';
-import { deletePost, getComments, getPosts, getUsers } from 'utils/fetches';
+import {
+  deletePost,
+  getComments,
+  getPosts,
+  getUsers,
+  postPost,
+} from 'utils/fetches';
 import {
   type Post,
   type PostsSliceState,
@@ -8,7 +14,8 @@ import {
   type Comment,
   Direction,
   Status,
-} from './postsTypes';
+  type PostBody,
+} from './types';
 
 const initialState: PostsSliceState = {
   posts: [],
@@ -25,12 +32,13 @@ const initialState: PostsSliceState = {
     isActive: false,
     params: {
       searchRequest: '',
-      direction: Direction.Ascending,
+      direction: Direction.Descending,
       username: '',
       isFavorites: false,
     },
   },
   filteredPosts: [],
+  clickedPostId: -1,
 };
 
 export const postsSlice = createAppSlice({
@@ -68,9 +76,11 @@ export const postsSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.status = Status.Idle;
-          state.posts = action.payload.map((post) => {
-            return { ...post, isFavorite: false, isChecked: false };
-          });
+          state.posts = action.payload
+            .map((post) => {
+              return { ...post, isFavorite: false, isChecked: false };
+            })
+            .reverse();
         },
         rejected: (state) => {
           state.status = Status.Failed;
@@ -116,10 +126,42 @@ export const postsSlice = createAppSlice({
       },
     ),
 
+    postPostAsync: create.asyncThunk(
+      async (postBody: PostBody) => {
+        const response: Post = await postPost(postBody);
+        return response;
+      },
+      {
+        pending: (state) => {
+          state.status = Status.Loading;
+        },
+        fulfilled: (state, action) => {
+          state.status = Status.Idle;
+
+          const returnedPost = action.payload;
+
+          const postId = state.posts.some((post) => post.id === returnedPost.id)
+            ? returnedPost.id + 1
+            : returnedPost.id;
+
+          const newPost = {
+            ...returnedPost,
+            id: postId,
+            isFavorite: false,
+            isChecked: false,
+          };
+          state.posts = [newPost].concat(state.posts);
+        },
+        rejected: (state) => {
+          state.status = Status.Failed;
+        },
+      },
+    ),
+
     deletePostAsync: create.asyncThunk(
       async (postId: number) => {
         const response: {} = await deletePost(postId);
-        return postId;
+        return response && postId;
       },
       {
         pending: (state) => {
@@ -137,6 +179,14 @@ export const postsSlice = createAppSlice({
       },
     ),
 
+    updatePostById: create.reducer((state, action: PayloadAction<Post>) => {
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id,
+      );
+      if (index !== -1) state.posts[index].title = action.payload.title;
+      state.posts[index].body = action.payload.body;
+    }),
+
     setFilterSearchRequest: create.reducer<string>(
       (state, action: PayloadAction<string>) => {
         if (!state.filter.isActive) state.filter.isActive = true;
@@ -146,7 +196,6 @@ export const postsSlice = createAppSlice({
 
     setFilterDirection: create.reducer<Direction>(
       (state, action: PayloadAction<Direction>) => {
-        if (!state.filter.isActive) state.filter.isActive = true;
         state.filter.params.direction = action.payload;
       },
     ),
@@ -223,6 +272,14 @@ export const postsSlice = createAppSlice({
       };
       state.filteredPosts = [];
     }),
+
+    setClickedPostId: create.reducer((state, action: PayloadAction<number>) => {
+      state.clickedPostId = action.payload;
+    }),
+
+    resetClickedPostId: create.reducer((state) => {
+      state.clickedPostId = -1;
+    }),
   }),
 
   selectors: {
@@ -233,6 +290,7 @@ export const postsSlice = createAppSlice({
     selectFilter: (posts) => posts.filter,
     selectFilteredPosts: (posts) => posts.filteredPosts,
     selectPostsAmount: (posts) => posts.postsAmount,
+    selectClickedPostId: (posts) => posts.clickedPostId,
   },
 });
 
@@ -241,6 +299,7 @@ export const {
   getUsersAsync,
   getCommentsAsync,
   deletePostAsync,
+  postPostAsync,
   toggleFavorites,
   toggleIsChecked,
   setFilterSearchRequest,
@@ -250,6 +309,9 @@ export const {
   toggleFilterIsFavorites,
   filter,
   skipFilter,
+  setClickedPostId,
+  resetClickedPostId,
+  updatePostById,
 } = postsSlice.actions;
 
 export const {
@@ -260,4 +322,5 @@ export const {
   selectFilter,
   selectFilteredPosts,
   selectPostsAmount,
+  selectClickedPostId,
 } = postsSlice.selectors;

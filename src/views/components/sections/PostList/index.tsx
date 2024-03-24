@@ -3,15 +3,17 @@ import type { PostListProps } from './types';
 import { Post } from 'views/components/ui-components/Post';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
-  deletePostAsync,
   filter,
   selectComments,
   selectUsers,
+  setClickedPostId,
   toggleFavorites,
   toggleIsChecked,
 } from 'slices/postsSlice';
 import clsx from 'clsx';
 import { useCallback } from 'react';
+import { setIsModalOpenedTrue } from 'slices/modalsSlice';
+import { ModalType } from 'slices/modalsSlice/types';
 
 export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
   const dispatch = useAppDispatch();
@@ -20,8 +22,8 @@ export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
 
   const handleDelete = useCallback(
     (postId: number) => {
-      dispatch(deletePostAsync(postId));
-      dispatch(filter());
+      dispatch(setIsModalOpenedTrue(ModalType.Approvement));
+      dispatch(setClickedPostId(postId));
     },
     [dispatch],
   );
@@ -37,7 +39,14 @@ export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
   const handleCheck = useCallback(
     (postId: number) => {
       dispatch(toggleIsChecked(postId));
-      dispatch(filter());
+    },
+    [dispatch],
+  );
+
+  const handleEdit = useCallback(
+    (postId: number) => {
+      dispatch(setIsModalOpenedTrue(ModalType.EditPost));
+      dispatch(setClickedPostId(postId));
     },
     [dispatch],
   );
@@ -58,6 +67,7 @@ export const PostList: React.FC<PostListProps> = ({ posts, extraClass }) => {
               isChecked={isChecked}
               isFavorite={isFavorite}
               onCheck={() => handleCheck(id)}
+              onEdit={() => handleEdit(id)}
               onDelete={() => handleDelete(id)}
               onLike={() => handleFavorites(id)}
               comments={feedback.length ? feedback : []}

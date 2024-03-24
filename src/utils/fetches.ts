@@ -1,4 +1,6 @@
-import { baseUrl, checkResponse } from './constants';
+import { type PostBody } from 'slices/postsSlice/types';
+import { baseUrl } from './constants';
+import { checkResponse } from './helpers';
 
 type TRequestOptions = {
   method: 'POST' | 'GET' | 'PATCH' | 'DELETE';
@@ -71,5 +73,25 @@ export const deletePost = async (postId: number) => {
   };
 
   const res = await fetch(`${baseUrl}/posts/${postId}`, requestOptions);
+  return checkResponse(res);
+};
+
+export const postPost = async (postBody: PostBody) => {
+  const requestOptions: TRequestOptions = {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title: postBody.title,
+      body: postBody.content,
+      userId: 1,
+    }),
+  };
+
+  const res = await fetch(`${baseUrl}/posts`, requestOptions);
   return checkResponse(res);
 };

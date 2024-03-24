@@ -1,0 +1,12 @@
+@import "/src/styles/variables/index";
+
+.popupContent {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+
+  .button {
+    min-width: 100px;
+    border-color: $dust-color;
+  }
+}

@@ -46,6 +46,7 @@
       border-color: $magenta-color;
 
       svg path {
+        transition: all 0.3s ease;
         fill: $magenta-color;
       }
     }

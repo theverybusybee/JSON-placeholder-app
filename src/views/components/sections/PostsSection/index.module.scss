@@ -15,18 +15,20 @@
     top: 24px;
     left: 0;
     align-self: flex-start;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 24px;
     z-index: 3;
     grid-area: buttonContainer;
     opacity: 0;
+    visibility: 0;
     transition: all 0.1s ease-in;
     padding-top: 10px;
 
     &_active {
       opacity: 1;
       padding: 0;
+      display: flex;
     }
   }
 

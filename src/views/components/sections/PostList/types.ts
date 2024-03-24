@@ -1,4 +1,4 @@
-import type { Post } from 'slices/postsTypes';
+import type { Post } from 'slices/postsSlice/types';
 
 export interface PostListProps {
   posts: Post[];

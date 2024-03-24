@@ -11,18 +11,22 @@ import {
 import { FilterSection } from 'views/components/sections/FilterSection';
 import { PostsSection } from 'views/components/sections/PostsSection';
 import { SortSection } from 'views/components/sections/SortSection';
-import { handlePostsAmount } from 'utils/constants';
+import { handlePostsAmount } from 'utils/helpers';
+import { selectIsModalOpened, setIsModalOpenedTrue } from 'slices/modalsSlice';
+import { ModalType } from 'slices/modalsSlice/types';
+import { PopupHandler } from 'views/components/popup/PopupHandler';
 
 const App = () => {
   const dispatch = useAppDispatch();
   const postsAmount = useAppSelector(selectPostsAmount);
   const posts = useAppSelector(selectPosts);
+  const isModalOpened = useAppSelector(selectIsModalOpened);
 
   useEffect(() => {
     dispatch(getPostsAsync());
     dispatch(getUsersAsync());
     dispatch(getCommentsAsync());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     handlePostsAmount(postsAmount);
@@ -35,8 +39,12 @@ const App = () => {
         onFavoritesFilter={() => {}}
         onUsernameFilter={() => {}}
       />
-      <SortSection allPostsAmount={posts.length.toString()} />
+      <SortSection
+        allPostsAmount={posts.length.toString()}
+        onAddPost={() => dispatch(setIsModalOpenedTrue(ModalType.CreatePost))}
+      />
       <PostsSection postsAmount={postsAmount} />
+      <PopupHandler isModalOpened={isModalOpened} />
     </main>
   );
 };

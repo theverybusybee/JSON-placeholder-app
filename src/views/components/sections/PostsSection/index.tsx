@@ -14,7 +14,8 @@ import {
 import { useMemo, useState } from 'react';
 import { Pagination } from 'views/components/ui-components/Pagination';
 import { Button } from 'views/components/ui-components/Button';
-import type { Post } from 'slices/postsTypes';
+import type { Post } from 'slices/postsSlice/types';
+import { getPagesAmount } from 'utils/helpers';
 
 export const PostsSection: React.FC<PostsSectionProps> = ({
   postsAmount,
@@ -35,7 +36,7 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       : [...posts].slice(startIndex, endIndex);
 
     return filteredArray;
-  }, [posts, filteredPosts, postsAmount, currentPageState]);
+  }, [posts, filteredPosts, postsAmount, currentPageState, isFilterActive]);
 
   const handleChangePage = (pageNumber: number) => {
     setCurrentPageState(pageNumber);
@@ -66,11 +67,9 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
     }
   };
 
-  const pagesAmount = Math.floor(
-    isFilterActive
-      ? filteredPosts.length / +postsAmount
-      : posts.length / +postsAmount,
-  );
+  const pagesAmount = useMemo(() => {
+    return getPagesAmount(isFilterActive, posts, filteredPosts, postsAmount);
+  }, [isFilterActive, posts, filteredPosts, postsAmount]);
 
   const isPostsHighlighted = posts.some((post) => post.isChecked);
 
@@ -102,12 +101,14 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       ) : (
         <p className={styles.content}>Ничего не найдено</p>
       )}
-      <Pagination
-        extraClass={styles.pagination}
-        onClick={handleChangePage}
-        currentPageState={currentPageState}
-        pagesAmount={currentPosts.length ? pagesAmount : 1}
-      />
+      {pagesAmount && (
+        <Pagination
+          extraClass={styles.pagination}
+          onClick={handleChangePage}
+          currentPageState={currentPageState}
+          pagesAmount={pagesAmount}
+        />
+      )}
     </section>
   );
 };

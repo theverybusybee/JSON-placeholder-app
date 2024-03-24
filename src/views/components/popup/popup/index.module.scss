@@ -1,0 +1,44 @@
+@import "/src/styles/variables/index";
+
+.popup {
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  border-radius: 20px;
+  position: relative;
+  max-width: 850px;
+  width: 100%;
+  cursor: default;
+  z-index: 10;
+  background-color: transparentize($carbon-color, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  .closeButton {
+    &:hover {
+      svg path {
+        fill: $magenta-color;
+        transition: all 0.3s ease;
+      }
+    }
+
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    svg path {
+      fill: $dust-color;
+    }
+  }
+
+  .title {
+    font: $popupTitleFontStyle;
+    color: $white-color;
+    text-align: center;
+
+    &_position__left {
+      text-align: left;
+    }
+  }
+}

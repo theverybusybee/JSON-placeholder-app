@@ -34,16 +34,26 @@ button {
   }
 }
 
-input {
+input,
+textarea {
   padding: 0;
+  border: none;
 
   &:focus,
   &:focus-visible {
-    outline-color: $teal-color;
+    outline-color: $magenta-color;
     outline-width: thin;
+    outline-style: solid;
+    caret-color: $magenta-color;
   }
 }
 
-input[type='checkbox'] {
-  margin: 0;
+input {
+  &[type='checkbox'] {
+    margin: 0;
+  }
+}
+
+textarea {
+  resize: none;
 }
