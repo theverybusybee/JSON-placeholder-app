@@ -6,7 +6,7 @@ import {
   selectClickedPostId,
   resetClickedPostId,
 } from 'slices/postsSlice';
-import { Popup } from 'views/components/popup/Popup';
+import { Popup } from '../popup';
 import { PopupContentCreatePost } from 'views/components/popup/content/PopupContentCreatePost';
 import { selectModalType } from 'slices/modalsSlice';
 import { ModalType } from 'slices/modalsSlice/types';
