@@ -1,4 +1,4 @@
-@import "/src/styles/variables/colors";
+@import '/src/styles/variables/colors';
 
 .overlay {
   width: 100vw;
@@ -11,13 +11,14 @@
   top: 0;
   left: 0;
   visibility: hidden;
-  transition:
-    visibility 0.3s,
-    background-color 0.3s linear;
+  opacity: 0;
+  transition: all 0.3s linear;
   cursor: pointer;
 
   &_active {
     visibility: visible;
+    opacity: 1;
+    display: flex;
     background-color: hsla(0, 0%, 10%, 0.7);
   }
 }

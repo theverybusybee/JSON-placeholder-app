@@ -1,5 +1,5 @@
 export interface PopupProps {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   titlePosition?: 'left' | 'center';
 }

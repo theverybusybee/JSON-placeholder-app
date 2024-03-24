@@ -161,7 +161,7 @@ export const postsSlice = createAppSlice({
     deletePostAsync: create.asyncThunk(
       async (postId: number) => {
         const response: {} = await deletePost(postId);
-        return postId;
+        return response && postId;
       },
       {
         pending: (state) => {

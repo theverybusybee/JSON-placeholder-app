@@ -36,7 +36,7 @@ export const PopupContentEditPost: React.FC<PopupContentEditPostProp> = () => {
         postContent: post.body,
       });
     }
-  }, []);
+  }, [clickedPostId, inputValues, posts, setInputValues]);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();

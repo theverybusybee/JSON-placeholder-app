@@ -14,9 +14,7 @@ import { PopupContentApprovement } from 'views/components/popup/content/PopupCon
 import { PopupContentEditPost } from '../content/PopupContentEditPost';
 import { type PopupHandlerProps } from './types';
 
-export const PopupHandler: React.FC<PopupHandlerProps> = ({
-  isModalOpened = false,
-}) => {
+export const PopupHandler: React.FC<PopupHandlerProps> = () => {
   const dispatch = useAppDispatch();
   const modalType = useAppSelector(selectModalType);
   const clickedPostId = useAppSelector(selectClickedPostId);
@@ -33,20 +31,19 @@ export const PopupHandler: React.FC<PopupHandlerProps> = ({
     <Popup
       title="Are you sure you want to delete this post"
       titlePosition="left"
-      isModalOpened={isModalOpened}
     >
       <PopupContentApprovement onApprove={() => handleDelete(clickedPostId)} />
     </Popup>
   );
 
   const PopupCreatePost = (
-    <Popup title="Add new post" isModalOpened={isModalOpened}>
+    <Popup title="Add new post">
       <PopupContentCreatePost />
     </Popup>
   );
 
   const PopupEditPost = (
-    <Popup title="Edit post" isModalOpened={isModalOpened}>
+    <Popup title="Edit post">
       <PopupContentEditPost />
     </Popup>
   );
@@ -61,5 +58,7 @@ export const PopupHandler: React.FC<PopupHandlerProps> = ({
     case ModalType.EditPost: {
       return PopupEditPost;
     }
+    default:
+      return PopupEditPost;
   }
 };
