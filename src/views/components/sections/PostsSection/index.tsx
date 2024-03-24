@@ -66,11 +66,13 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
     }
   };
 
-  const pagesAmount = Math.floor(
-    isFilterActive
+  const getPagesAmount = () => {
+    const countPages = isFilterActive
       ? filteredPosts.length / +postsAmount
-      : posts.length / +postsAmount,
-  );
+      : posts.length / +postsAmount;
+
+    return countPages < 1 ? 0 : Math.ceil(countPages);
+  };
 
   const isPostsHighlighted = posts.some((post) => post.isChecked);
 
@@ -102,12 +104,14 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
       ) : (
         <p className={styles.content}>Ничего не найдено</p>
       )}
-      <Pagination
-        extraClass={styles.pagination}
-        onClick={handleChangePage}
-        currentPageState={currentPageState}
-        pagesAmount={currentPosts.length ? pagesAmount : 1}
-      />
+      {getPagesAmount() && (
+        <Pagination
+          extraClass={styles.pagination}
+          onClick={handleChangePage}
+          currentPageState={currentPageState}
+          pagesAmount={getPagesAmount()}
+        />
+      )}
     </section>
   );
 };
