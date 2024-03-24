@@ -1,8 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
-
 import viteTsconfigPaths from 'vite-tsconfig-paths';
-
 import eslint from 'vite-plugin-eslint';
 import svgr from 'vite-plugin-svgr';
 

@@ -6,7 +6,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   borderStyle?: ButtonBorderStyle;
   hasArrow?: boolean;
   isActive?: boolean;
-  // isDisabled?: boolean;
   Icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   extraClass?: string;
 }
