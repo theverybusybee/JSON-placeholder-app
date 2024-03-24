@@ -1,0 +1,44 @@
+@import '/src/styles/variables/index';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font: $contentFontStyleRegular;
+  }
+
+  .inputTitle {
+    color: $white-color;
+    font: inherit;
+  }
+
+  .input,
+  .textarea {
+    min-width: 100%;
+    padding: 12px;
+    background: $eerie-color;
+    border-radius: 12px;
+    color: $white-color;
+    font: inherit;
+
+    &::placeholder {
+      color: $carbon-color;
+    }
+  }
+  .textarea {
+    height: 124px;
+  }
+
+  .submitButton {
+    border-color: $dust-color;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
