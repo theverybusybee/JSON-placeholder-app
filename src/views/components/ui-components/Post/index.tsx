@@ -17,6 +17,7 @@ export const Post: React.FC<PostProps> = ({
   title,
   content,
   onDelete,
+  onEdit,
   isFavorite,
   isChecked,
   onCheck,
@@ -49,7 +50,7 @@ export const Post: React.FC<PostProps> = ({
             <HeartIcon />
           )}
         </button>
-        <button className={styles.iconButton}>
+        <button className={styles.iconButton} onClick={onEdit}>
           <EditIcon />
         </button>
       </div>

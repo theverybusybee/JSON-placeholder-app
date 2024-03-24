@@ -7,6 +7,7 @@ export interface PostProps {
   isChecked: boolean;
   onDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onLike: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onEdit: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onCheck: () => void;
   comments: {
     postId: number;
