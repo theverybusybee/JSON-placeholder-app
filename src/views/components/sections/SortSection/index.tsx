@@ -3,7 +3,7 @@ import type { SortSectionProps } from './types';
 import { Button } from 'views/components/ui-components/Button';
 import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Direction } from 'slices/postsSlice/types';
+import { Direction, PostsAmount } from 'slices/postsSlice/types';
 import {
   filter,
   selectFilter,
@@ -13,7 +13,7 @@ import {
 } from 'slices/postsSlice';
 import { ButtonShape } from 'views/components/ui-components/Button/types';
 import PlusIcon from 'assets/images/icons/plus-icon.svg?react';
-import { buttonsAmountMockData } from 'utils/mock-data';
+import { PostsAmountMockData } from 'utils/mock-data';
 
 export const SortSection: React.FC<SortSectionProps> = ({
   allPostsAmount,
@@ -52,18 +52,20 @@ export const SortSection: React.FC<SortSectionProps> = ({
       </article>
       <article className={styles.buttonsContainer}>
         <p>posts shown per page:</p>
-        {buttonsAmountMockData.map((el, index) => (
+        {PostsAmountMockData.map((el, index) => (
           <Button
             key={index}
             content={el.amount}
             isActive={
               el.amount === postsAmount ||
-              (el.amount === 'все' && postsAmount === allPostsAmount)
+              (el.amount === PostsAmount.All && postsAmount === allPostsAmount)
             }
             onClick={() => {
               dispatch(
                 setFilterPostsAmount(
-                  el.amount === 'все' ? allPostsAmount : el.amount.toString(),
+                  el.amount === PostsAmount.All
+                    ? allPostsAmount
+                    : el.amount.toString(),
                 ),
               );
             }}

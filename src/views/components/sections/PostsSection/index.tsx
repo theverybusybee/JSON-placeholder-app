@@ -14,7 +14,7 @@ import {
 import { useMemo, useState } from 'react';
 import { Pagination } from 'views/components/ui-components/Pagination';
 import { Button } from 'views/components/ui-components/Button';
-import type { Post } from 'slices/postsSlice/types';
+import { PostsAmount, type Post } from 'slices/postsSlice/types';
 import { getPagesAmount } from 'utils/helpers';
 
 export const PostsSection: React.FC<PostsSectionProps> = ({
@@ -29,8 +29,11 @@ export const PostsSection: React.FC<PostsSectionProps> = ({
   const dispatch = useAppDispatch();
 
   const currentPosts = useMemo(() => {
-    const startIndex = +postsAmount * (currentPageState! - 1);
-    const endIndex = startIndex + +postsAmount;
+    const slicePostsAmount = +(postsAmount === PostsAmount.All
+      ? posts.length
+      : postsAmount);
+    const startIndex = slicePostsAmount * (currentPageState! - 1);
+    const endIndex = startIndex + slicePostsAmount;
     const filteredArray = isFilterActive
       ? [...filteredPosts].slice(startIndex, endIndex)
       : [...posts].slice(startIndex, endIndex);

@@ -1,8 +1,14 @@
-export const buttonsAmountMockData = [
-  { amount: '10' },
-  { amount: '20' },
-  { amount: '25' },
-  { amount: '50' },
-  { amount: '100' },
-  { amount: 'все' },
+import { PostsAmount } from 'slices/postsSlice/types';
+
+export const PostsAmountMockData: PostsAmountMockData[] = [
+  { amount: PostsAmount.Ten },
+  { amount: PostsAmount.Twenty },
+  { amount: PostsAmount.TwentyFive },
+  { amount: PostsAmount.Fifty },
+  { amount: PostsAmount.OneHundred },
+  { amount: PostsAmount.All },
 ];
+
+interface PostsAmountMockData {
+  amount: PostsAmount;
+}

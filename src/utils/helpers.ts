@@ -1,4 +1,4 @@
-import { type Post } from 'slices/postsSlice/types';
+import { PostsAmount, type Post } from 'slices/postsSlice/types';
 
 export const getPagesAmount = (
   isFilterActive: boolean,
@@ -26,6 +26,19 @@ export const generateId = (): string => {
   );
 };
 
-export const handlePostsAmount = (postsNumber: string) => {
-  localStorage.setItem('postsAmount', postsNumber);
+export const setLocalStorageItem = (key: string, value: string) => {
+  localStorage.setItem(key, value);
+};
+export const setPostsAmount = (postsAmount: string | null): string => {
+  switch (postsAmount) {
+    case PostsAmount.Ten:
+    case PostsAmount.Twenty:
+    case PostsAmount.TwentyFive:
+    case PostsAmount.Fifty:
+    case PostsAmount.OneHundred:
+    case PostsAmount.All:
+      return postsAmount;
+    default:
+      return PostsAmount.Ten;
+  }
 };
