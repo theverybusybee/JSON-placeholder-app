@@ -9,11 +9,12 @@ import {
   selectFilter,
   selectPostsAmount,
   setFilterDirection,
-  setFilterPostsAmount,
+  setPostsAmount,
 } from 'slices/postsSlice';
 import { ButtonShape } from 'views/components/ui-components/Button/types';
 import PlusIcon from 'assets/images/icons/plus-icon.svg?react';
-import { PostsAmountMockData } from 'utils/mock-data';
+import type { PostsAmountMockData} from 'utils/mock-data';
+import { postsAmountMockData } from 'utils/mock-data';
 
 export const SortSection: React.FC<SortSectionProps> = ({
   allPostsAmount,
@@ -35,6 +36,10 @@ export const SortSection: React.FC<SortSectionProps> = ({
     dispatch(filter());
   };
 
+  const handlePostsAmountPerPage = (post: PostsAmountMockData) => {
+    dispatch(setPostsAmount(post.amount));
+  };
+
   return (
     <section className={clsx(styles.section, extraClass)}>
       <article className={styles.buttonsContainer}>
@@ -52,7 +57,7 @@ export const SortSection: React.FC<SortSectionProps> = ({
       </article>
       <article className={styles.buttonsContainer}>
         <p>posts shown per page:</p>
-        {PostsAmountMockData.map((el, index) => (
+        {postsAmountMockData.map((el, index) => (
           <Button
             key={index}
             content={el.amount}
@@ -61,13 +66,7 @@ export const SortSection: React.FC<SortSectionProps> = ({
               (el.amount === PostsAmount.All && postsAmount === allPostsAmount)
             }
             onClick={() => {
-              dispatch(
-                setFilterPostsAmount(
-                  el.amount === PostsAmount.All
-                    ? allPostsAmount
-                    : el.amount.toString(),
-                ),
-              );
+              handlePostsAmountPerPage(el);
             }}
           />
         ))}

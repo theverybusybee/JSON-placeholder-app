@@ -1,6 +1,6 @@
 import { PostsAmount } from 'slices/postsSlice/types';
 
-export const PostsAmountMockData: PostsAmountMockData[] = [
+export const postsAmountMockData: PostsAmountMockData[] = [
   { amount: PostsAmount.Ten },
   { amount: PostsAmount.Twenty },
   { amount: PostsAmount.TwentyFive },
@@ -9,6 +9,6 @@ export const PostsAmountMockData: PostsAmountMockData[] = [
   { amount: PostsAmount.All },
 ];
 
-interface PostsAmountMockData {
+export interface PostsAmountMockData {
   amount: PostsAmount;
 }
