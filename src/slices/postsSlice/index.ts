@@ -16,13 +16,13 @@ import {
   Status,
   type PostBody,
 } from './types';
-import { setPostsAmount } from 'utils/helpers';
+import { setDefaultPostsAmount } from 'utils/helpers';
 const initialState: PostsSliceState = {
   posts: [],
   users: [],
   comments: [],
   status: Status.Idle,
-  postsAmount: setPostsAmount(localStorage.getItem('postsAmount')),
+  postsAmount: setDefaultPostsAmount(),
   filter: {
     isActive: false,
     params: {
@@ -93,7 +93,7 @@ export const postsSlice = createAppSlice({
           state.status = Status.Loading;
         },
         fulfilled: (state, action) => {
-          state.status = Status.Loading;
+          state.status = Status.Idle;
           state.comments = action.payload;
         },
         rejected: (state) => {
@@ -201,7 +201,7 @@ export const postsSlice = createAppSlice({
       },
     ),
 
-    setFilterPostsAmount: create.reducer<string>(
+    setPostsAmount: create.reducer<string>(
       (state, action: PayloadAction<string>) => {
         state.postsAmount = action.payload;
       },
@@ -299,7 +299,7 @@ export const {
   setFilterSearchRequest,
   setFilterDirection,
   setFilterUsername,
-  setFilterPostsAmount,
+  setPostsAmount,
   toggleFilterIsFavorites,
   filter,
   skipFilter,

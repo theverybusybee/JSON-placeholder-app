@@ -8,6 +8,7 @@ import {
   selectFilter,
   selectFilteredPosts,
   selectPosts,
+  selectPostsAmount,
   toggleFavorites,
   toggleIsChecked,
 } from 'slices/postsSlice';
@@ -17,11 +18,9 @@ import { Button } from 'views/components/ui-components/Button';
 import { PostsAmount, type Post } from 'slices/postsSlice/types';
 import { getPagesAmount } from 'utils/helpers';
 
-export const PostsSection: React.FC<PostsSectionProps> = ({
-  postsAmount,
-  extraClass,
-}) => {
+export const PostsSection: React.FC<PostsSectionProps> = ({ extraClass }) => {
   const posts = useAppSelector(selectPosts);
+  const postsAmount = useAppSelector(selectPostsAmount);
   const filteredPosts = useAppSelector(selectFilteredPosts);
 
   const { isActive: isFilterActive } = useAppSelector(selectFilter);

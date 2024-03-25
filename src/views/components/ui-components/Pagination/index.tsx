@@ -13,17 +13,17 @@ export const Pagination: React.FC<PaginationProps> = ({
     return { number: i + 1, id: generateId() };
   });
 
+  const listItemClass = (pageNumber: number) =>
+    clsx(styles.item, {
+      [styles.item_active]: currentPageState === pageNumber,
+    });
+
   return (
     <ul className={clsx(styles.list, extraClass)}>
       {pagesArr.length !== 0 &&
         pagesArr.map((page) => {
           return (
-            <li
-              className={clsx(styles.item, {
-                [styles.item_active]: currentPageState === page.number,
-              })}
-              key={page.id}
-            >
+            <li className={listItemClass(page.number)} key={page.id}>
               <button
                 className={styles.button}
                 onClick={() => onClick(page.number)}

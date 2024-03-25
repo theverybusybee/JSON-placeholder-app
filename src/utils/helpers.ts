@@ -6,9 +6,12 @@ export const getPagesAmount = (
   filteredPosts: Post[],
   postsAmount: string,
 ) => {
+  const totalPostsAmount = +(postsAmount === PostsAmount.All
+    ? posts.length
+    : postsAmount);
   const countPages = isFilterActive
-    ? filteredPosts.length / +postsAmount
-    : posts.length / +postsAmount;
+    ? filteredPosts.length / totalPostsAmount
+    : posts.length / totalPostsAmount;
 
   return countPages < 1 ? 0 : Math.ceil(countPages);
 };
@@ -29,9 +32,9 @@ export const generateId = (): string => {
 export const setLocalStorageItem = (key: string, value: string) => {
   localStorage.setItem(key, value);
 };
-export const setPostsAmount = (postsAmount: string | null): string => {
+export const setDefaultPostsAmount = (): string => {
+  const postsAmount = localStorage.getItem('postsAmount');
   switch (postsAmount) {
-    case PostsAmount.Ten:
     case PostsAmount.Twenty:
     case PostsAmount.TwentyFive:
     case PostsAmount.Fifty:
